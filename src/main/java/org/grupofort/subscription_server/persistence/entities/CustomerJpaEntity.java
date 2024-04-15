@@ -10,6 +10,17 @@ import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 @Entity
 public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer>
 {
+	@Override
+	public @Nonnull Customer toDomainEntity()
+	{
+		return new Customer
+				       (
+						       id,
+						       name,
+						       email
+				       );
+	}
+
 	public Long getId()
 	{
 		return id;
@@ -27,14 +38,4 @@ public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer>
 
 	@Column(nullable = false)
 	private String email;
-
-	@Override
-	public @Nonnull Customer toDomainEntity()
-	{
-		return new Customer(
-			id,
-			name,
-			email
-		);
-	}
 }

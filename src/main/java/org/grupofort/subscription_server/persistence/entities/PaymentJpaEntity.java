@@ -15,6 +15,20 @@ import java.util.Optional;
 @Entity
 public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 {
+	@Nonnull
+	@Override
+	public Payment toDomainEntity()
+	{
+		return new Payment
+				       (
+						       id,
+						       subscription.toDomainEntity(),
+						       paidAmount,
+						       paymentDate,
+						       Optional.ofNullable(promotionCode)
+				       );
+	}
+
 	public Long getId()
 	{
 		return id;
@@ -39,17 +53,4 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 
 	@Column(nullable = true)
 	private String promotionCode;
-
-	@Nonnull
-	@Override
-	public Payment toDomainEntity()
-	{
-		return new Payment(
-			id,
-			subscription.toDomainEntity(),
-			paidAmount,
-			paymentDate,
-			Optional.ofNullable(promotionCode)
-		);
-	}
 }

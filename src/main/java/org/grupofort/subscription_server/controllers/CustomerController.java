@@ -23,7 +23,10 @@ public class CustomerController
 	@GetMapping()
 	public List<Customer> getAllCustomers()
 	{
-		return customerRepository.findAll().stream().map(CustomerJpaEntity::toDomainEntity).toList();
+		return customerRepository.findAll()
+							     .stream()
+							     .map(CustomerJpaEntity::toDomainEntity)
+							     .toList();
 	}
 
 	private final CustomerRepository customerRepository;

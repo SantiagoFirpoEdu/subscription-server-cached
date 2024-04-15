@@ -13,6 +13,18 @@ import java.math.BigDecimal;
 @Entity
 public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Application>
 {
+	@Nonnull
+	@Override
+	public Application toDomainEntity()
+	{
+		return new Application
+				       (
+						       id,
+						       name,
+						       monthlyCost
+				       );
+	}
+
 	public Long getId()
 	{
 		return id;
@@ -31,15 +43,4 @@ public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Applicati
 
 	@Column(nullable = false)
 	private BigDecimal monthlyCost;
-
-	@Nonnull
-	@Override
-	public Application toDomainEntity()
-	{
-		return new Application(
-			id,
-			name,
-			monthlyCost
-		);
-	}
 }

@@ -13,6 +13,20 @@ import java.util.Date;
 @Entity
 public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription>
 {
+	@Nonnull
+	@Override
+	public Subscription toDomainEntity()
+	{
+		return new Subscription
+				       (
+						       id,
+						       application.toDomainEntity(),
+						       customer.toDomainEntity(),
+						       startDate,
+						       endDate
+				       );
+	}
+
 	public Long getId()
 	{
 		return id;
@@ -37,17 +51,4 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 
 	@Column
 	Date endDate;
-
-	@Nonnull
-	@Override
-	public Subscription toDomainEntity()
-	{
-		return new Subscription(
-			id,
-			application.toDomainEntity(),
-			customer.toDomainEntity(),
-			startDate,
-			endDate
-		);
-	}
 }
