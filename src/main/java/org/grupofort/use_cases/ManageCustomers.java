@@ -1,6 +1,6 @@
 package org.grupofort.use_cases;
 
-import org.grupofort.subscription_server.repositories.CustomerRepository;
+import org.grupofort.subscription_server.persistence.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,5 +13,5 @@ public class ManageCustomers
 		this.customerRepository = customerRepository;
 	}
 
-	private CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 }

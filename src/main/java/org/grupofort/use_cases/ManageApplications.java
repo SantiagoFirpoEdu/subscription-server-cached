@@ -1,6 +1,6 @@
 package org.grupofort.use_cases;
 
-import org.grupofort.subscription_server.repositories.ApplicationRepository;
+import org.grupofort.subscription_server.persistence.repositories.ApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,5 +13,5 @@ public class ManageApplications
 		this.applicationRepository = applicationRepository;
 	}
 
-	private ApplicationRepository applicationRepository;
+	private final ApplicationRepository applicationRepository;
 }

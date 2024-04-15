@@ -1,15 +1,19 @@
-package org.grupofort.subscription_server.persistence_entities;
+package org.grupofort.subscription_server.persistence.entities;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import org.grupofort.domain.entities.Payment;
+import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
-public class PaymentJpaEntity
+public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 {
 	public Long getId()
 	{
@@ -35,4 +39,17 @@ public class PaymentJpaEntity
 
 	@Column(nullable = true)
 	private String promotionCode;
+
+	@Nonnull
+	@Override
+	public Payment toDomainEntity()
+	{
+		return new Payment(
+			id,
+			subscription.toDomainEntity(),
+			paidAmount,
+			paymentDate,
+			Optional.ofNullable(promotionCode)
+		);
+	}
 }

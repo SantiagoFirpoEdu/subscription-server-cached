@@ -1,16 +1,13 @@
-package org.grupofort.subscription_server.persistence_entities;
-
+package org.grupofort.subscription_server.persistence.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-import java.math.BigDecimal;
-
 @Entity
-public class ApplicationJpaEntity
+public class UserJpaEntity
 {
-	public Long getId()
+	private Long getId()
 	{
 		return id;
 	}
@@ -24,8 +21,8 @@ public class ApplicationJpaEntity
 	private Long id;
 
 	@Column(nullable = false)
-	private String name;
+	private String username;
 
 	@Column(nullable = false)
-	private BigDecimal monthlyCost;
+	private String password;
 }
