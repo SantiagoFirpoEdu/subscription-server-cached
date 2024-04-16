@@ -1,6 +1,6 @@
 package org.grupofort.use_cases;
 
-import org.grupofort.subscription_server.persistence.repositories.CustomerRepository;
+import org.grupofort.subscription_server.persistence.jpa_repositories.CustomerJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class ManageCustomers
 {
 	@Autowired
-	public ManageCustomers(CustomerRepository customerRepository)
+	public ManageCustomers(CustomerJpaRepository customerJpaRepository)
 	{
-		this.customerRepository = customerRepository;
+		this.customerJpaRepository = customerJpaRepository;
 	}
 
-	private final CustomerRepository customerRepository;
+	private final CustomerJpaRepository customerJpaRepository;
 }

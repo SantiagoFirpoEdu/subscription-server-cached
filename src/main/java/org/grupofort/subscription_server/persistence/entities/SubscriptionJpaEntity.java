@@ -11,7 +11,7 @@ import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 import java.util.Date;
 
 @Entity
-public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription>
+public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription, SubscriptionJpaEntity>
 {
 	@Nonnull
 	@Override
@@ -27,9 +27,41 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 				       );
 	}
 
+	@Override
+	public SubscriptionJpaEntity fromDomainEntity(Subscription domainEntity)
+	{
+		return new SubscriptionJpaEntity(
+			domainEntity.id(),
+			application.fromDomainEntity(domainEntity.application()),
+			customer.fromDomainEntity(domainEntity.customer()),
+			domainEntity.startDate(),
+			domainEntity.endDate()
+		);
+	}
+
 	public Long getId()
 	{
 		return id;
+	}
+
+	public SubscriptionJpaEntity(ApplicationJpaEntity application, CustomerJpaEntity customer, Date startDate, Date endDate)
+	{
+		this.application = application;
+		this.customer = customer;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	protected SubscriptionJpaEntity(Long id, ApplicationJpaEntity application, CustomerJpaEntity customer, Date startDate, Date endDate)
+	{
+		this
+		(
+			application,
+			customer,
+			startDate,
+			endDate
+		);
+		this.id = id;
 	}
 
 	@Id

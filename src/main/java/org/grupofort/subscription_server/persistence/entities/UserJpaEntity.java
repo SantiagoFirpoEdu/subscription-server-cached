@@ -8,7 +8,7 @@ import org.grupofort.domain.entities.User;
 import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
 @Entity
-public class UserJpaEntity implements ConvertibleToDomainEntity<User>
+public class UserJpaEntity implements ConvertibleToDomainEntity<User, UserJpaEntity>
 {
 	@Nonnull
 	@Override
@@ -20,6 +20,26 @@ public class UserJpaEntity implements ConvertibleToDomainEntity<User>
 			username,
 			password
 		);
+	}
+
+	@Override
+	public UserJpaEntity fromDomainEntity(User domainEntity)
+	{
+		return new UserJpaEntity
+		(
+			domainEntity.id(),
+			domainEntity.username(),
+			domainEntity.password()
+		);
+	}
+
+	protected UserJpaEntity() {}
+
+	protected UserJpaEntity(Long id, String username, String password)
+	{
+		this.id = id;
+		this.username = username;
+		this.password = password;
 	}
 
 	private Long getId()

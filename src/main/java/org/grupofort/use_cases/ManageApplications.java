@@ -1,6 +1,6 @@
 package org.grupofort.use_cases;
 
-import org.grupofort.subscription_server.persistence.repositories.ApplicationRepository;
+import org.grupofort.subscription_server.persistence.jpa_repositories.ApplicationJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class ManageApplications
 {
 	@Autowired
-	public ManageApplications(ApplicationRepository applicationRepository)
+	public ManageApplications(ApplicationJpaRepository applicationJpaRepository)
 	{
-		this.applicationRepository = applicationRepository;
+		this.applicationJpaRepository = applicationJpaRepository;
 	}
 
-	private final ApplicationRepository applicationRepository;
+	private final ApplicationJpaRepository applicationJpaRepository;
 }

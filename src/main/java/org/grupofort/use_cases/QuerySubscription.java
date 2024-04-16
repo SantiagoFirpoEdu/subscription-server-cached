@@ -1,6 +1,6 @@
 package org.grupofort.use_cases;
 
-import org.grupofort.subscription_server.persistence.repositories.SubscriptionRepository;
+import org.grupofort.subscription_server.persistence.jpa_repositories.SubscriptionJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class QuerySubscription
 {
 	@Autowired
-	public QuerySubscription(SubscriptionRepository subscriptionRepository)
+	public QuerySubscription(SubscriptionJpaRepository subscriptionJpaRepository)
 	{
-		this.subscriptionRepository = subscriptionRepository;
+		this.subscriptionJpaRepository = subscriptionJpaRepository;
 	}
 
-	private final SubscriptionRepository subscriptionRepository;
+	private final SubscriptionJpaRepository subscriptionJpaRepository;
 }

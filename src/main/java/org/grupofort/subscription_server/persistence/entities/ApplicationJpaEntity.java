@@ -11,7 +11,7 @@ import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 import java.math.BigDecimal;
 
 @Entity
-public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Application>
+public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Application, ApplicationJpaEntity>
 {
 	@Nonnull
 	@Override
@@ -25,9 +25,26 @@ public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Applicati
 				       );
 	}
 
+	@Override
+	public ApplicationJpaEntity fromDomainEntity(Application domainEntity)
+	{
+		return new ApplicationJpaEntity(domainEntity.id(), domainEntity.name(), domainEntity.monthlyCost());
+	}
+
 	public Long getId()
 	{
 		return id;
+	}
+
+	protected ApplicationJpaEntity()
+	{
+	}
+
+	protected ApplicationJpaEntity(Long id, String name, BigDecimal monthlyCost)
+	{
+		this.id = id;
+		this.name = name;
+		this.monthlyCost = monthlyCost;
 	}
 
 	private void setId(Long id)

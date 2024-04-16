@@ -2,7 +2,7 @@ package org.grupofort.subscription_server.controllers;
 
 import org.grupofort.domain.entities.Application;
 import org.grupofort.subscription_server.persistence.entities.ApplicationJpaEntity;
-import org.grupofort.subscription_server.persistence.repositories.ApplicationRepository;
+import org.grupofort.subscription_server.persistence.jpa_repositories.ApplicationJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +15,19 @@ import java.util.List;
 public class ApplicationsController
 {
 	@Autowired
-	public ApplicationsController(ApplicationRepository applicationRepository)
+	public ApplicationsController(ApplicationJpaRepository applicationJpaRepository)
 	{
-		this.applicationRepository = applicationRepository;
+		this.applicationJpaRepository = applicationJpaRepository;
 	}
 
 	@GetMapping()
 	public List<Application> getAllApplications()
 	{
-		return applicationRepository.findAll()
+		return applicationJpaRepository.findAll()
 								    .stream()
 								    .map(ApplicationJpaEntity::toDomainEntity)
 								    .toList();
 	}
 
-	private final ApplicationRepository applicationRepository;
+	private final ApplicationJpaRepository applicationJpaRepository;
 }
