@@ -8,7 +8,8 @@ public record Subscription
 	Application application,
 	Customer customer,
 	LocalDate startDate,
-	LocalDate endDate
+	LocalDate endDate,
+	ESubscriptionStatus applicationStatus
 )
 {
 }

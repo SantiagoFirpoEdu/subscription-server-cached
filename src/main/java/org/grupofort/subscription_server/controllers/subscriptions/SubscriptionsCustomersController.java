@@ -1,4 +1,4 @@
-package org.grupofort.subscription_server.controllers.applications;
+package org.grupofort.subscription_server.controllers.subscriptions;
 
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscriptionsDataAccess;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "servcad/asscli")
-public class ApplicationsCustomersController
+public class SubscriptionsCustomersController
 {
 	@Autowired
-	public ApplicationsCustomersController(QuerySubscriptionsDataAccess querySubscriptions)
+	public SubscriptionsCustomersController(QuerySubscriptionsDataAccess querySubscriptions)
 	{
 		this.querySubscriptions = querySubscriptions;
 	}

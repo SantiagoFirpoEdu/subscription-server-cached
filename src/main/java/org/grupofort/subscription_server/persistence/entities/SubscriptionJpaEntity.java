@@ -2,6 +2,7 @@ package org.grupofort.subscription_server.persistence.entities;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import org.grupofort.domain.entities.ESubscriptionStatus;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
@@ -21,8 +22,15 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 						       application.toDomainEntity(),
 						       customer.toDomainEntity(),
 						       startDate,
-						       endDate
+						       endDate,
+							   getStatus()
 				       );
+	}
+
+	public ESubscriptionStatus getStatus()
+	{
+        return LocalDate.now().isAfter(endDate) ? ESubscriptionStatus.CANCELLED
+												: ESubscriptionStatus.ACTIVE;
 	}
 
 	@Override
