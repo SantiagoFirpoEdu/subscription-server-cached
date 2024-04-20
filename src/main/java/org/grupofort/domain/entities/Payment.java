@@ -1,7 +1,7 @@
 package org.grupofort.domain.entities;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public record Payment
@@ -9,7 +9,7 @@ public record Payment
 	long id,
 	Subscription subscription,
 	BigDecimal paidAmount,
-	Date paymentDate,
+	LocalDate paymentDate,
 	Optional<String> promotionCode
 )
 {

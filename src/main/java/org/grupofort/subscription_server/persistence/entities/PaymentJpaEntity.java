@@ -6,6 +6,7 @@ import org.grupofort.domain.entities.Payment;
 import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, Paym
 		this.id = id;
 	}
 
-	public PaymentJpaEntity(SubscriptionJpaEntity subscription, BigDecimal paidAmount, Date paymentDate, String promotionCode)
+	public PaymentJpaEntity(SubscriptionJpaEntity subscription, BigDecimal paidAmount, LocalDate paymentDate, String promotionCode)
 	{
 		this.subscription = subscription;
 		this.paidAmount = paidAmount;
@@ -50,7 +51,7 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, Paym
 		this.promotionCode = promotionCode;
 	}
 
-	protected PaymentJpaEntity(Long id, SubscriptionJpaEntity subscription, BigDecimal paidAmount, Date paymentDate, String promotionCode)
+	protected PaymentJpaEntity(Long id, SubscriptionJpaEntity subscription, BigDecimal paidAmount, LocalDate paymentDate, String promotionCode)
 	{
 		this
 		(
@@ -75,7 +76,7 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, Paym
 	private BigDecimal paidAmount;
 
 	@Column(nullable = false)
-	private Date paymentDate;
+	private LocalDate paymentDate;
 
 	@Column(nullable = true)
 	private String promotionCode;

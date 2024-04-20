@@ -1,6 +1,6 @@
 package org.grupofort.subscription_server.persistence.repositories;
 
-import org.grupofort.subscription_server.data_access.RegisterPaymentDataAccess;
+import org.grupofort.use_cases.execute_payment.RegisterPaymentDataAccess;
 import org.grupofort.subscription_server.persistence.entities.PaymentJpaEntity;
 import org.grupofort.subscription_server.persistence.entities.SubscriptionJpaEntity;
 import org.grupofort.subscription_server.persistence.exceptions.SubscriptionNotFoundException;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Component
@@ -24,7 +24,7 @@ public class PaymentRepository implements RegisterPaymentDataAccess
     }
 
     @Override
-    public void registerPayment(Date paymentDate, long subscriptionId, BigDecimal paidAmount) throws SubscriptionNotFoundException
+    public void registerPayment(LocalDate paymentDate, long subscriptionId, BigDecimal paidAmount) throws SubscriptionNotFoundException
     {
         Optional<SubscriptionJpaEntity> subscription = subscriptionJpaRepository.findById(subscriptionId);
 
