@@ -1,5 +1,6 @@
 package org.grupofort.subscription_server.controllers;
 
+import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
 import org.grupofort.subscription_server.persistence.exceptions.CustomerNotFoundException;
 import org.grupofort.use_cases.subscriptions.manage_subscriptions.SubscriptionManagement;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class SubscriptionController
 {
 	@PostMapping()
-	void createSubscription(@RequestBody CreateSubscriptionRequest createSubscriptionRequest) throws ApplicationNotFoundException, CustomerNotFoundException
+	Subscription createSubscription(@RequestBody CreateSubscriptionRequest createSubscriptionRequest) throws ApplicationNotFoundException, CustomerNotFoundException
 	{
-		subscriptionManagement.addSubscription(createSubscriptionRequest.customerId(), createSubscriptionRequest.applicationId());
+		return subscriptionManagement.addSubscription(createSubscriptionRequest.customerId(), createSubscriptionRequest.applicationId());
 	}
 
 	@Autowired()

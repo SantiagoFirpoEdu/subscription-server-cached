@@ -4,10 +4,12 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.grupofort.domain.entities.Customer;
 import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
 @Entity
+@Table(name = "customers")
 public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer, CustomerJpaEntity>
 {
 	@Override

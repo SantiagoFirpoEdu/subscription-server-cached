@@ -32,7 +32,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public boolean addSubscription(long customerId, long applicationId) throws CustomerNotFoundException, ApplicationNotFoundException
+    public Subscription addSubscription(long customerId, long applicationId) throws CustomerNotFoundException, ApplicationNotFoundException
     {
         Optional<ApplicationJpaEntity> application = applicationJpaRepository.findById(applicationId);
 
@@ -56,15 +56,19 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
             LocalDate.now()
         );
 
-        subscriptionJpaRepository.save(subscription);
-
-        return true;
+        return subscriptionJpaRepository.save(subscription).toDomainEntity();
     }
 
     @Override
     public List<Subscription> querySubscriptions(ESubscriptionStatusFilter statusFilter)
     {
         return null;
+    }
+
+    @Override
+    public List<Subscription> getSubscriptionsForCustomer(long customerId)
+    {
+        return subscriptionJpaRepository.getSubscriptionsForCustomer(customerId);
     }
 
     @Override

@@ -1,9 +1,12 @@
 package org.grupofort.use_cases.subscriptions.manage_subscriptions;
 
+import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
 import org.grupofort.subscription_server.persistence.exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class SubscriptionManagement
@@ -14,7 +17,7 @@ public class SubscriptionManagement
 		this.subscriptionDataAccess = subscriptionDataAccess;
 	}
 
-	public boolean addSubscription(long customerId, long applicationId) throws ApplicationNotFoundException, CustomerNotFoundException
+	public Subscription addSubscription(long customerId, long applicationId) throws ApplicationNotFoundException, CustomerNotFoundException
 	{
 		return subscriptionDataAccess.addSubscription(customerId, applicationId);
 	}

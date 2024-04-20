@@ -1,8 +1,7 @@
 package org.grupofort.subscription_server.controllers;
 
 import org.grupofort.domain.entities.Customer;
-import org.grupofort.subscription_server.persistence.entities.CustomerJpaEntity;
-import org.grupofort.subscription_server.persistence.jpa_repositories.CustomerJpaRepository;
+import org.grupofort.use_cases.manage_customers.QueryCustomersDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +14,16 @@ import java.util.List;
 public class CustomerController
 {
 	@Autowired
-	public CustomerController(CustomerJpaRepository customerJpaRepository)
+	public CustomerController(QueryCustomersDataAccess customerDataAccess)
 	{
-		this.customerJpaRepository = customerJpaRepository;
+		this.customerDataAccess = customerDataAccess;
 	}
 
 	@GetMapping()
 	public List<Customer> getAllCustomers()
 	{
-		return customerJpaRepository.findAll()
-							     .stream()
-							     .map(CustomerJpaEntity::toDomainEntity)
-							     .toList();
+		return customerDataAccess.findAll();
 	}
 
-	private final CustomerJpaRepository customerJpaRepository;
+	private final QueryCustomersDataAccess customerDataAccess;
 }

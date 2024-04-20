@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Entity
+@Table(name = "payments")
 public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, PaymentJpaEntity>
 {
 	@Nonnull

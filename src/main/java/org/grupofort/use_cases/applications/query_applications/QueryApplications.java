@@ -1,7 +1,6 @@
 package org.grupofort.use_cases.applications.query_applications;
 
 import org.grupofort.domain.entities.Subscription;
-import org.grupofort.use_cases.applications.QueryApplicationsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

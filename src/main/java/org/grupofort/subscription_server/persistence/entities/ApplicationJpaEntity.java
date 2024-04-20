@@ -5,12 +5,14 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.grupofort.domain.entities.Application;
 import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "applications")
 public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Application, ApplicationJpaEntity>
 {
 	@Nonnull

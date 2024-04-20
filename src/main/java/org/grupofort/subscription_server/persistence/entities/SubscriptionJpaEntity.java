@@ -1,16 +1,14 @@
 package org.grupofort.subscription_server.persistence.entities;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "subscriptions")
 public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription, SubscriptionJpaEntity>
 {
 	@Nonnull

@@ -1,12 +1,10 @@
 package org.grupofort.subscription_server.controllers;
 
 import org.grupofort.domain.entities.Application;
-import org.grupofort.subscription_server.persistence.entities.ApplicationJpaEntity;
-import org.grupofort.subscription_server.persistence.jpa_repositories.ApplicationJpaRepository;
+import org.grupofort.use_cases.applications.manage_applications.ManageApplications;
+import org.grupofort.use_cases.applications.query_applications.QueryApplicationsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,19 +13,24 @@ import java.util.List;
 public class ApplicationsController
 {
 	@Autowired
-	public ApplicationsController(ApplicationJpaRepository applicationJpaRepository)
+	public ApplicationsController(QueryApplicationsDataAccess queryApplicationsDataAccess, ManageApplications manageApplications)
 	{
-		this.applicationJpaRepository = applicationJpaRepository;
+		this.queryApplicationsDataAccess = queryApplicationsDataAccess;
+		this.manageApplications = manageApplications;
 	}
 
 	@GetMapping()
 	public List<Application> getAllApplications()
 	{
-		return applicationJpaRepository.findAll()
-								    .stream()
-								    .map(ApplicationJpaEntity::toDomainEntity)
-								    .toList();
+		return queryApplicationsDataAccess.findAll();
 	}
 
-	private final ApplicationJpaRepository applicationJpaRepository;
+	@PostMapping("atualizacusto/{applicationId}")
+	public Application updateApplicationCost(@PathVariable long applicationId, double newCost)
+	{
+		return manageApplications.updateApplicationCost(applicationId, newCost);
+	}
+
+	private final QueryApplicationsDataAccess queryApplicationsDataAccess;
+	private final ManageApplications manageApplications;
 }
