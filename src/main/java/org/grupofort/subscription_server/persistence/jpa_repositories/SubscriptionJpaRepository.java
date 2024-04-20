@@ -1,13 +1,12 @@
 package org.grupofort.subscription_server.persistence.jpa_repositories;
 
-import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.entities.SubscriptionJpaEntity;
-import org.grupofort.use_cases.subscriptions.query_subscription.ESubscriptionStatusFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -22,4 +21,8 @@ public interface SubscriptionJpaRepository extends JpaRepository<SubscriptionJpa
 	       "OR s.startDate > CURRENT_DATE AND :statusFilter = 'PENDING' " +
 	       "OR :statusFilter = 'ALL'")
 	List<SubscriptionJpaEntity> querySubscriptions(String statusFilter);
+
+	@Query("UPDATE SubscriptionJpaEntity s SET s.endDate = :newDate WHERE s.id = :id AND :newDate >= s.endDate")
+	@Modifying(clearAutomatically = true)
+	void updateSubscriptionEndDateById(long id, LocalDate newDate);
 }

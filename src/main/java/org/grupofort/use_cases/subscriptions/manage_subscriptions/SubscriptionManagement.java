@@ -7,6 +7,7 @@ import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscriptio
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,15 +15,22 @@ import java.util.Optional;
 public class SubscriptionManagement
 {
 	@Autowired
-	public SubscriptionManagement(AddSubscriptionDataAccess subscriptionDataAccess)
+	public SubscriptionManagement(AddSubscriptionDataAccess subscriptionDataAccess, UpdateSubscriptionDataAccess updateSubscriptionDataAccess)
 	{
 		this.subscriptionDataAccess = subscriptionDataAccess;
-	}
+        this.updateSubscriptionDataAccess = updateSubscriptionDataAccess;
+    }
 
 	public Subscription addSubscription(long customerId, long applicationId) throws ApplicationNotFoundException, CustomerNotFoundException
 	{
 		return subscriptionDataAccess.addSubscription(customerId, applicationId);
 	}
 
+	public void updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate)
+	{
+		updateSubscriptionDataAccess.updateSubscriptionEndDate(subscriptionId, newEndDate);
+	}
+
 	private final AddSubscriptionDataAccess subscriptionDataAccess;
+	private final UpdateSubscriptionDataAccess updateSubscriptionDataAccess;
 }

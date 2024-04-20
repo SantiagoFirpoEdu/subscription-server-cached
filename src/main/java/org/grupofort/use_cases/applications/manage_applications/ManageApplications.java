@@ -1,6 +1,7 @@
 package org.grupofort.use_cases.applications.manage_applications;
 
 import org.grupofort.domain.entities.Application;
+import org.grupofort.subscription_server.persistence.jpa_repositories.InvalidCostException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ public class ManageApplications
 		this.manageApplicationsDataAccess = manageApplicationsDataAccess;
 	}
 
-	public Application updateApplicationCost(long applicationId, double newCost)
+	public Application updateApplicationCost(long applicationId, double newCost) throws InvalidCostException
 	{
 		return manageApplicationsDataAccess.updateApplicationCost(applicationId, newCost);
 	}

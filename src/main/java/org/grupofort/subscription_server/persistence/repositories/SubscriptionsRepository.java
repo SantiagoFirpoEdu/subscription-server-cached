@@ -11,6 +11,7 @@ import org.grupofort.subscription_server.persistence.jpa_repositories.Applicatio
 import org.grupofort.subscription_server.persistence.jpa_repositories.CustomerJpaRepository;
 import org.grupofort.subscription_server.persistence.jpa_repositories.SubscriptionJpaRepository;
 import org.grupofort.use_cases.subscriptions.manage_subscriptions.AddSubscriptionDataAccess;
+import org.grupofort.use_cases.subscriptions.manage_subscriptions.UpdateSubscriptionDataAccess;
 import org.grupofort.use_cases.subscriptions.query_subscription.ESubscriptionStatusFilter;
 import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class SubscriptionsRepository implements AddSubscriptionDataAccess, QuerySubscriptionsDataAccess
+public class SubscriptionsRepository implements AddSubscriptionDataAccess, QuerySubscriptionsDataAccess, UpdateSubscriptionDataAccess
 {
     @Autowired
     public SubscriptionsRepository(SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
@@ -101,4 +102,10 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     private final SubscriptionJpaRepository subscriptionJpaRepository;
     private final CustomerJpaRepository customerJpaRepository;
     private final ApplicationJpaRepository applicationJpaRepository;
+
+    @Override
+    public boolean updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate)
+    {
+        return false;
+    }
 }

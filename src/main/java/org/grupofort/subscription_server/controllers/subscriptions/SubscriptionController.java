@@ -1,4 +1,4 @@
-package org.grupofort.subscription_server.controllers;
+package org.grupofort.subscription_server.controllers.subscriptions;
 
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
@@ -22,7 +22,7 @@ public class SubscriptionController
 		return subscriptionManagement.addSubscription(createSubscriptionRequest.customerId(), createSubscriptionRequest.applicationId());
 	}
 
-	@GetMapping
+	@GetMapping()
 	public List<Subscription> getAllSubscriptions()
 	{
 		return querySubscriptions.findAll();

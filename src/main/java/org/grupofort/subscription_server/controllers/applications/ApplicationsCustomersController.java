@@ -1,4 +1,4 @@
-package org.grupofort.subscription_server.controllers;
+package org.grupofort.subscription_server.controllers.applications;
 
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscriptionsDataAccess;

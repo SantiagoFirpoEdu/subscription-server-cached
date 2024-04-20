@@ -1,4 +1,4 @@
-package org.grupofort.use_cases.manage_customers;
+package org.grupofort.use_cases.customers.query_customers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

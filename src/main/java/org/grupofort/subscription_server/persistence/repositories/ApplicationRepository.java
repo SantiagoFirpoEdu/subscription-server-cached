@@ -4,9 +4,11 @@ import org.grupofort.domain.entities.Application;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.entities.ApplicationJpaEntity;
 import org.grupofort.subscription_server.persistence.jpa_repositories.ApplicationJpaRepository;
+import org.grupofort.subscription_server.persistence.jpa_repositories.InvalidCostException;
 import org.grupofort.use_cases.applications.manage_applications.ManageApplicationsDataAccess;
 import org.grupofort.use_cases.applications.query_applications.QueryApplicationsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,19 +23,23 @@ public class ApplicationRepository implements ManageApplicationsDataAccess, Quer
 	}
 
 	@Override
-	public Application updateApplicationCost(long applicationId, double newCost)
+	public @NonNull Application updateApplicationCost(long applicationId, double newCost) throws InvalidCostException
 	{
+		if (newCost <= 0.0)
+		{
+			throw new InvalidCostException(newCost);
+		}
 		return applicationJpaRepository.updateApplicationCost(applicationId, newCost);
 	}
 
 	@Override
-	public List<Subscription> getSubscriptionsForApplication(long applicationId)
+	public @NonNull List<Subscription> getSubscriptionsForApplication(long applicationId)
 	{
 		return applicationJpaRepository.getSubscriptionsForApplication(applicationId);
 	}
 
 	@Override
-	public List<Application> findAll()
+	public @NonNull List<Application> findAll()
 	{
 		return applicationJpaRepository.findAll()
 									   .stream()
