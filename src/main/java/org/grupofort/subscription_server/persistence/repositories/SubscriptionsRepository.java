@@ -1,25 +1,30 @@
 package org.grupofort.subscription_server.persistence.repositories;
 
+import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.entities.ApplicationJpaEntity;
 import org.grupofort.subscription_server.persistence.entities.CustomerJpaEntity;
 import org.grupofort.subscription_server.persistence.entities.SubscriptionJpaEntity;
 import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
 import org.grupofort.subscription_server.persistence.exceptions.CustomerNotFoundException;
+import org.grupofort.subscription_server.persistence.exceptions.SubscriptionNotFoundException;
 import org.grupofort.subscription_server.persistence.jpa_repositories.ApplicationJpaRepository;
 import org.grupofort.subscription_server.persistence.jpa_repositories.CustomerJpaRepository;
 import org.grupofort.subscription_server.persistence.jpa_repositories.SubscriptionJpaRepository;
-import org.grupofort.use_cases.manage_subscriptions.SubscriptionDataAccess;
+import org.grupofort.use_cases.subscriptions.manage_subscriptions.AddSubscriptionDataAccess;
+import org.grupofort.use_cases.subscriptions.query_subscription.ESubscriptionStatusFilter;
+import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class SubscriptionRepository implements SubscriptionDataAccess
+public class SubscriptionsRepository implements AddSubscriptionDataAccess, QuerySubscriptionsDataAccess
 {
     @Autowired
-    public SubscriptionRepository(SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
+    public SubscriptionsRepository(SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
     {
         this.subscriptionJpaRepository = subscriptionJpaRepository;
         this.customerJpaRepository = customerJpaRepository;
@@ -47,13 +52,31 @@ public class SubscriptionRepository implements SubscriptionDataAccess
         (
             application.get(),
             customer.get(),
-            new Date(),
-            new Date()
+            LocalDate.now(),
+            LocalDate.now()
         );
 
         subscriptionJpaRepository.save(subscription);
 
         return true;
+    }
+
+    @Override
+    public List<Subscription> querySubscriptions(ESubscriptionStatusFilter statusFilter)
+    {
+        return null;
+    }
+
+    @Override
+    public boolean isSubscriptionActive(long subscriptionId) throws SubscriptionNotFoundException
+    {
+	    Optional<SubscriptionJpaEntity> found = subscriptionJpaRepository.findById(subscriptionId);
+        if (found.isEmpty())
+        {
+            throw new SubscriptionNotFoundException(subscriptionId);
+        }
+
+        return found.get().toDomainEntity().endDate().isAfter(LocalDate.now());
     }
 
     private final SubscriptionJpaRepository subscriptionJpaRepository;
