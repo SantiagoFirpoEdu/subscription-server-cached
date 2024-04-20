@@ -8,7 +8,7 @@ import jakarta.persistence.OneToOne;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.ConvertibleToDomainEntity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription, SubscriptionJpaEntity>
@@ -44,7 +44,7 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 		return id;
 	}
 
-	public SubscriptionJpaEntity(ApplicationJpaEntity application, CustomerJpaEntity customer, Date startDate, Date endDate)
+	public SubscriptionJpaEntity(ApplicationJpaEntity application, CustomerJpaEntity customer, LocalDate startDate, LocalDate endDate)
 	{
 		this.application = application;
 		this.customer = customer;
@@ -52,7 +52,7 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 		this.endDate = endDate;
 	}
 
-	protected SubscriptionJpaEntity(Long id, ApplicationJpaEntity application, CustomerJpaEntity customer, Date startDate, Date endDate)
+	protected SubscriptionJpaEntity(Long id, ApplicationJpaEntity application, CustomerJpaEntity customer, LocalDate startDate, LocalDate endDate)
 	{
 		this
 		(
@@ -62,6 +62,10 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 			endDate
 		);
 		this.id = id;
+	}
+
+	protected SubscriptionJpaEntity()
+	{
 	}
 
 	@Id
@@ -79,8 +83,8 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 	CustomerJpaEntity customer;
 
 	@Column
-	Date startDate;
+	LocalDate startDate;
 
 	@Column
-	Date endDate;
+	LocalDate endDate;
 }
