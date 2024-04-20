@@ -3,6 +3,16 @@ package org.grupofort.use_cases.subscriptions.query_subscription;
 public enum ESubscriptionStatusFilter
 {
 	ALL,
-	ACTIVE,
-	INACTIVE
+	ACTIVE, CANCELLED;
+
+	public static ESubscriptionStatusFilter convertFromLocalized(String filterType) throws InvalidSubscriptionStatusException
+	{
+		return switch (filterType)
+		{
+			case "TODAS" -> ALL;
+			case "ATIVAS" -> ACTIVE;
+			case "CANCELADAS" -> CANCELLED;
+			default -> throw new InvalidSubscriptionStatusException(filterType);
+		};
+	}
 }

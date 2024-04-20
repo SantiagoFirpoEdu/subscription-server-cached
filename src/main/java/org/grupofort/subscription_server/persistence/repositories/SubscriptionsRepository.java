@@ -62,13 +62,19 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     @Override
     public List<Subscription> querySubscriptions(ESubscriptionStatusFilter statusFilter)
     {
-        return null;
+        return subscriptionJpaRepository.querySubscriptions(statusFilter.toString())
+                                        .stream()
+                                        .map(SubscriptionJpaEntity::toDomainEntity)
+                                        .toList();
     }
 
     @Override
     public List<Subscription> getSubscriptionsForCustomer(long customerId)
     {
-        return subscriptionJpaRepository.getSubscriptionsForCustomer(customerId);
+        return subscriptionJpaRepository.getSubscriptionsForCustomer(customerId)
+                                        .stream()
+                                        .map(SubscriptionJpaEntity::toDomainEntity)
+                                        .toList();
     }
 
     @Override
@@ -81,6 +87,15 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
         }
 
         return found.get().toDomainEntity().endDate().isAfter(LocalDate.now());
+    }
+
+    @Override
+    public List<Subscription> findAll()
+    {
+        return subscriptionJpaRepository.findAll()
+                                        .stream()
+                                        .map(SubscriptionJpaEntity::toDomainEntity)
+                                        .toList();
     }
 
     private final SubscriptionJpaRepository subscriptionJpaRepository;
