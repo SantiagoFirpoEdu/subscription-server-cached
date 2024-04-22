@@ -77,9 +77,9 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 	@Id
 	private Long id;
 
-	private void setId(Long id)
+	public void setEndDate(LocalDate endDate)
 	{
-		this.id = id;
+		this.endDate = endDate;
 	}
 
 	@OneToOne

@@ -21,8 +21,4 @@ public interface SubscriptionJpaRepository extends JpaRepository<SubscriptionJpa
 	       "OR s.startDate > CURRENT_DATE AND :statusFilter = 'PENDING' " +
 	       "OR :statusFilter = 'ALL'")
 	List<SubscriptionJpaEntity> querySubscriptions(String statusFilter);
-
-	@Query("UPDATE SubscriptionJpaEntity s SET s.endDate = :newDate WHERE s.id = :id AND :newDate >= s.endDate")
-	@Modifying(clearAutomatically = true)
-	void updateSubscriptionEndDateById(long id, LocalDate newDate);
 }

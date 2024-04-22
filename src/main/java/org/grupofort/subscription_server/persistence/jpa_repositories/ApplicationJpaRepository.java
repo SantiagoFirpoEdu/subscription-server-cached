@@ -13,10 +13,6 @@ import java.util.List;
 @Repository
 public interface ApplicationJpaRepository extends JpaRepository<ApplicationJpaEntity, Long>
 {
-	@Query("UPDATE ApplicationJpaEntity a SET a.monthlyCost = :newCost WHERE a.id = :applicationId")
-	@Modifying()
-	Application updateApplicationCost(long applicationId, double newCost);
-
 	@Query("SELECT s FROM SubscriptionJpaEntity s WHERE s.id = :applicationId")
 	List<Subscription> getSubscriptionsForApplication(long applicationId);
 }

@@ -104,8 +104,16 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     private final ApplicationJpaRepository applicationJpaRepository;
 
     @Override
-    public boolean updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate)
+    public Subscription updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate) throws SubscriptionNotFoundException
     {
-        return false;
+        Optional<SubscriptionJpaEntity> existingSubscription = subscriptionJpaRepository.findById(subscriptionId);
+        if (existingSubscription.isEmpty())
+        {
+            throw new SubscriptionNotFoundException(subscriptionId);
+        }
+
+        SubscriptionJpaEntity subscription = existingSubscription.get();
+        subscription.setEndDate(newEndDate);
+        return subscriptionJpaRepository.save(subscription).toDomainEntity();
     }
 }
