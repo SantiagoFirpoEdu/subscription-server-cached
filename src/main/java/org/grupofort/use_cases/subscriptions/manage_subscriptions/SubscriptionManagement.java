@@ -3,6 +3,7 @@ package org.grupofort.use_cases.subscriptions.manage_subscriptions;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
 import org.grupofort.subscription_server.persistence.exceptions.CustomerNotFoundException;
+import org.grupofort.subscription_server.persistence.exceptions.SubscriptionNotFoundException;
 import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class SubscriptionManagement
 		return subscriptionDataAccess.addSubscription(customerId, applicationId);
 	}
 
-	public void updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate)
+	public void updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate) throws SubscriptionNotFoundException
 	{
 		updateSubscriptionDataAccess.updateSubscriptionEndDate(subscriptionId, newEndDate);
 	}
