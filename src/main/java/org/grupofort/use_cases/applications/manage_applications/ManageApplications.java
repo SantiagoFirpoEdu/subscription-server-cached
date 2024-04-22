@@ -1,9 +1,12 @@
 package org.grupofort.use_cases.applications.manage_applications;
 
 import org.grupofort.domain.entities.Application;
+import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
 import org.grupofort.subscription_server.persistence.jpa_repositories.InvalidCostException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 @Component
 public class ManageApplications
@@ -14,7 +17,7 @@ public class ManageApplications
 		this.manageApplicationsDataAccess = manageApplicationsDataAccess;
 	}
 
-	public Application updateApplicationCost(long applicationId, double newCost) throws InvalidCostException
+	public Application updateApplicationCost(long applicationId, BigDecimal newCost) throws InvalidCostException, ApplicationNotFoundException
 	{
 		return manageApplicationsDataAccess.updateApplicationCost(applicationId, newCost);
 	}
