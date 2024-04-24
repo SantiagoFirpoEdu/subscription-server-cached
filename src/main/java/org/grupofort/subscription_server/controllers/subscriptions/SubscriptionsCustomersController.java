@@ -1,7 +1,7 @@
 package org.grupofort.subscription_server.controllers.subscriptions;
 
 import org.grupofort.domain.entities.Subscription;
-import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscriptionsDataAccess;
+import org.grupofort.domain.data_access.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

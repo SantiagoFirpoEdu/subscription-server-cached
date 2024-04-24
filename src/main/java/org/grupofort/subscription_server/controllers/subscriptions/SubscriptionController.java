@@ -1,12 +1,12 @@
 package org.grupofort.subscription_server.controllers.subscriptions;
 
 import org.grupofort.domain.entities.Subscription;
-import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
-import org.grupofort.subscription_server.persistence.exceptions.CustomerNotFoundException;
-import org.grupofort.use_cases.subscriptions.manage_subscriptions.SubscriptionManagement;
-import org.grupofort.use_cases.subscriptions.query_subscription.ESubscriptionStatusFilter;
-import org.grupofort.use_cases.subscriptions.query_subscription.InvalidSubscriptionStatusException;
-import org.grupofort.use_cases.subscriptions.query_subscription.QuerySubscription;
+import org.grupofort.domain.data_access.exceptions.ApplicationNotFoundException;
+import org.grupofort.domain.data_access.exceptions.CustomerNotFoundException;
+import org.grupofort.subscription_server.use_cases.subscriptions.manage_subscriptions.SubscriptionManagement;
+import org.grupofort.subscription_server.use_cases.subscriptions.query_subscription.ESubscriptionStatusFilter;
+import org.grupofort.subscription_server.use_cases.subscriptions.query_subscription.InvalidSubscriptionStatusException;
+import org.grupofort.subscription_server.use_cases.subscriptions.query_subscription.QuerySubscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;

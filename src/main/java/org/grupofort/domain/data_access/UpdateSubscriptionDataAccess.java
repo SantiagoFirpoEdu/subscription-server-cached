@@ -1,0 +1,13 @@
+package org.grupofort.domain.data_access;
+
+import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+
+@Component
+public interface UpdateSubscriptionDataAccess
+{
+    Subscription updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate) throws SubscriptionNotFoundException;
+}

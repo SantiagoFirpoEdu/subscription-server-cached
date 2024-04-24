@@ -1,10 +1,10 @@
 package org.grupofort.subscription_server.controllers.applications;
 
 import org.grupofort.domain.entities.Application;
-import org.grupofort.subscription_server.persistence.exceptions.ApplicationNotFoundException;
-import org.grupofort.subscription_server.persistence.jpa_repositories.InvalidCostException;
-import org.grupofort.use_cases.applications.manage_applications.ManageApplications;
-import org.grupofort.use_cases.applications.query_applications.QueryApplicationsDataAccess;
+import org.grupofort.domain.data_access.exceptions.ApplicationNotFoundException;
+import org.grupofort.domain.data_access.exceptions.InvalidCostException;
+import org.grupofort.subscription_server.use_cases.applications.manage_applications.ManageApplications;
+import org.grupofort.domain.data_access.QueryApplicationsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
