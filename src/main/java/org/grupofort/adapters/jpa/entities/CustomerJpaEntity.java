@@ -1,10 +1,7 @@
 package org.grupofort.adapters.jpa.entities;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.grupofort.domain.entities.Customer;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
 
@@ -51,6 +48,7 @@ public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer, Cu
 	}
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false)

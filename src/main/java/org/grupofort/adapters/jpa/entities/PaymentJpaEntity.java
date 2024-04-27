@@ -66,7 +66,7 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, Paym
 	protected PaymentJpaEntity() {}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@OneToOne(optional = false)
