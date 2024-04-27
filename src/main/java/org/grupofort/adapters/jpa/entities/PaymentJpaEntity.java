@@ -69,7 +69,7 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, Paym
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	private SubscriptionJpaEntity subscription;
 
 	@Column(nullable = false)
