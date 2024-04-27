@@ -1,5 +1,6 @@
 package org.grupofort.adapters.repositories;
 
+import org.grupofort.adapters.jpa.entities.SubscriptionJpaEntity;
 import org.grupofort.domain.entities.Application;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.adapters.jpa.entities.ApplicationJpaEntity;
@@ -50,7 +51,9 @@ public class ApplicationRepository implements ManageApplicationsDataAccess, Quer
 	@Override
 	public @NonNull List<Subscription> getSubscriptionsForApplication(long applicationId)
 	{
-		return applicationJpaRepository.getSubscriptionsForApplication(applicationId);
+		return applicationJpaRepository.getSubscriptionsForApplication(applicationId).stream()
+									   .map(SubscriptionJpaEntity::toDomainEntity)
+									   .toList();
 	}
 
 	@Override
