@@ -15,8 +15,7 @@ public interface SubscriptionJpaRepository extends JpaRepository<SubscriptionJpa
 
 	@Query("SELECT s FROM SubscriptionJpaEntity s " +
 	       "WHERE s.endDate >= CURRENT_DATE AND s.startDate <= CURRENT_DATE AND :statusFilter = 'ACTIVE' " +
-	       "OR s.endDate < CURRENT_DATE AND :statusFilter = 'INACTIVE' " +
-	       "OR s.startDate > CURRENT_DATE AND :statusFilter = 'PENDING' " +
+	       "OR s.endDate < CURRENT_DATE AND :statusFilter = 'CANCELLED' " +
 	       "OR :statusFilter = 'ALL'")
 	List<SubscriptionJpaEntity> querySubscriptions(String statusFilter);
 }
