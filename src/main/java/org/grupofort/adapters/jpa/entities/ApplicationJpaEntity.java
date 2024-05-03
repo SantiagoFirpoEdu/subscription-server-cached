@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "applications")
-public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Application, ApplicationJpaEntity>
+public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Application>
 {
 	@Nonnull
 	@Override
@@ -24,8 +24,7 @@ public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Applicati
 				       );
 	}
 
-	@Override
-	public ApplicationJpaEntity fromDomainEntity(Application domainEntity)
+	public static ApplicationJpaEntity fromDomainEntity(Application domainEntity)
 	{
 		return new ApplicationJpaEntity(domainEntity.id(), domainEntity.name(), domainEntity.monthlyCost());
 	}

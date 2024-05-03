@@ -2,9 +2,8 @@ package org.grupofort.adapters.jpa;
 
 import jakarta.annotation.Nonnull;
 
-public interface ConvertibleToDomainEntity<DomainEntityType, DTOType>
+public interface ConvertibleToDomainEntity<DomainEntityType>
 {
 	@Nonnull
 	DomainEntityType toDomainEntity();
-	DTOType fromDomainEntity(DomainEntityType domainEntity);
 }

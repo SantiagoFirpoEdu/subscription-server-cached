@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "subscriptions")
-public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription, SubscriptionJpaEntity>
+public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription>
 {
 	@Nonnull
 	@Override
@@ -33,13 +33,12 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 												: ESubscriptionStatus.ACTIVE;
 	}
 
-	@Override
-	public SubscriptionJpaEntity fromDomainEntity(Subscription domainEntity)
+	public static SubscriptionJpaEntity fromDomainEntity(Subscription domainEntity)
 	{
 		return new SubscriptionJpaEntity(
 			domainEntity.id(),
-			application.fromDomainEntity(domainEntity.application()),
-			customer.fromDomainEntity(domainEntity.customer()),
+			ApplicationJpaEntity.fromDomainEntity(domainEntity.application()),
+			CustomerJpaEntity.fromDomainEntity(domainEntity.customer()),
 			domainEntity.startDate(),
 			domainEntity.endDate()
 		);

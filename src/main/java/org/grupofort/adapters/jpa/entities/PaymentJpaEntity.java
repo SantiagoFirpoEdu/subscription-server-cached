@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "payments")
-public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, PaymentJpaEntity>
+public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 {
 	@Nonnull
 	@Override
@@ -27,10 +27,9 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment, Paym
 		);
 	}
 
-	@Override
-	public PaymentJpaEntity fromDomainEntity(Payment domainEntity)
+	public static PaymentJpaEntity fromDomainEntity(Payment domainEntity)
 	{
-		return new PaymentJpaEntity(domainEntity.id(), subscription.fromDomainEntity(domainEntity.subscription()), domainEntity.paidAmount(), domainEntity.paymentDate(), domainEntity.promotionCode().orElse("none"));
+		return new PaymentJpaEntity(domainEntity.id(), SubscriptionJpaEntity.fromDomainEntity(domainEntity.subscription()), domainEntity.paidAmount(), domainEntity.paymentDate(), domainEntity.promotionCode().orElse("none"));
 	}
 
 	public Long getId()

@@ -7,7 +7,7 @@ import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
 
 @Entity
 @Table(name = "customers")
-public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer, CustomerJpaEntity>
+public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer>
 {
 	@Override
 	public @Nonnull Customer toDomainEntity()
@@ -20,8 +20,7 @@ public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer, Cu
 				       );
 	}
 
-	@Override
-	public CustomerJpaEntity fromDomainEntity(Customer domainEntity)
+	public static CustomerJpaEntity fromDomainEntity(Customer domainEntity)
 	{
 		return new CustomerJpaEntity(domainEntity.id(), domainEntity.name(), domainEntity.email());
 	}
