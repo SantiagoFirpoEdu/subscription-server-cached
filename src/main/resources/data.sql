@@ -2,13 +2,20 @@ insert into applications (name, monthly_cost)
 values ('Spotify', 16.50),
        ('Netflix', 21.50),
        ('Amazon Prime', 12.50),
-       ('Disney Plus', 15.50);
+       ('Disney Plus', 15.50),
+       ('Gympass', 35.00);
 
 insert into customers (name, email)
 values ('João', 'Joao123@gmail.com'),
        ('Maria', 'maria_rita_321@hotmail.com'),
        ('Pedro', 'pedro-Melo-3@terra.com.br'),
-       ('wesley', 'WesleyGoularte@gmail.com');
+       ('wesley', 'WesleyGoularte@gmail.com'),
+       ('Paulo', 'paulo.moreira@gmail.com'),
+       ('Felipe', 'felipe.ferreira@gmail.com'),
+       ('Antonio', 'antonio.henrique@gmail.com'),
+       ('Roberto', 'roberto86.@gmail.com'),
+       ('Miguel', 'miguel.schmidtt@gmail.com'),
+       ('Julia', 'julia.moreira@gmail.com');
 
 insert into subscriptions (customer_id, application_id, start_date, end_date)
 values (1, 1, '2021-02-20', '2021-06-20'),
