@@ -54,7 +54,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
             application.get(),
             customer.get(),
             LocalDate.now(),
-            LocalDate.now()
+            LocalDate.now().plusDays(7)
         );
 
         return subscriptionJpaRepository.save(subscription).toDomainEntity();
@@ -97,6 +97,12 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
                                         .stream()
                                         .map(SubscriptionJpaEntity::toDomainEntity)
                                         .toList();
+    }
+
+    @Override
+    public Optional<Subscription> findById(long subscriptionId)
+    {
+        return subscriptionJpaRepository.findById(subscriptionId).map(SubscriptionJpaEntity::toDomainEntity);
     }
 
     private final SubscriptionJpaRepository subscriptionJpaRepository;

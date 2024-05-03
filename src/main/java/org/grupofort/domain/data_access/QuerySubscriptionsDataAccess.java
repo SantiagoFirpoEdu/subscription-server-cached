@@ -5,6 +5,7 @@ import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException
 import org.grupofort.application.use_cases.subscriptions.query_subscription.ESubscriptionStatusFilter;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface QuerySubscriptionsDataAccess
 {
@@ -13,4 +14,6 @@ public interface QuerySubscriptionsDataAccess
 	boolean isSubscriptionActive(long subscriptionId) throws SubscriptionNotFoundException;
 
 	List<Subscription> findAll();
+
+	Optional<Subscription> findById(long subscriptionId);
 }
