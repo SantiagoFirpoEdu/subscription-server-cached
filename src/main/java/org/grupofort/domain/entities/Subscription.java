@@ -12,4 +12,8 @@ public record Subscription
 	ESubscriptionStatus applicationStatus
 )
 {
+	public boolean isActive()
+	{
+		return applicationStatus == ESubscriptionStatus.ACTIVE;
+	}
 }
