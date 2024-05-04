@@ -8,6 +8,7 @@ import org.grupofort.application.use_cases.subscriptions.query_subscription.ESub
 import org.grupofort.application.use_cases.subscriptions.query_subscription.InvalidSubscriptionStatusException;
 import org.grupofort.application.use_cases.subscriptions.query_subscription.QuerySubscription;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class SubscriptionController
 {
 	@PostMapping()
+	@ResponseStatus(HttpStatus.CREATED)
 	public @NonNull Subscription createSubscription(@RequestBody @NonNull CreateSubscriptionRequest createSubscriptionRequest) throws ApplicationNotFoundException, CustomerNotFoundException
 	{
 		return subscriptionManagement.addSubscription(createSubscriptionRequest.customerId(), createSubscriptionRequest.applicationId());
