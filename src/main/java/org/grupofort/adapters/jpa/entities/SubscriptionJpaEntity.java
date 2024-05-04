@@ -52,11 +52,6 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 	public ApplicationJpaEntity getApplication() {
         return application;
     }
-
-    public void setApplication(ApplicationJpaEntity application) {
-        this.application = application;
-    }
-
 	public SubscriptionJpaEntity(ApplicationJpaEntity application, CustomerJpaEntity customer, LocalDate startDate, LocalDate endDate)
 	{
 		this.application = application;
