@@ -16,23 +16,27 @@ import java.util.Optional;
 public class ManageApplications
 {
 	@Autowired
-    private ApplicationJpaRepository applicationJpaRepository;
-	
-	@Autowired
-	public ManageApplications(ManageApplicationsDataAccess manageApplicationsDataAccess)
+	public ManageApplications(ManageApplicationsDataAccess manageApplicationsDataAccess, ApplicationJpaRepository applicationJpaRepository)
 	{
 		this.manageApplicationsDataAccess = manageApplicationsDataAccess;
+		this.applicationJpaRepository = applicationJpaRepository;
 	}
 
-	public void updateApplicationCost(long applicationId, BigDecimal newCost) throws ApplicationNotFoundException {
-    Optional<ApplicationJpaEntity> applicationOpt = applicationJpaRepository.findById(applicationId);
-    if (!applicationOpt.isPresent()) {
-        throw new ApplicationNotFoundException("Application with ID " + applicationId + " not found.");
-    }
-    ApplicationJpaEntity application = applicationOpt.get();
-    application.setMonthlyCost(newCost);
-    applicationJpaRepository.save(application);
-}
+	public Application updateApplicationCost(long applicationId, BigDecimal newCost) throws ApplicationNotFoundException
+	{
+		Optional<ApplicationJpaEntity> applicationOpt = applicationJpaRepository.findById(applicationId);
+		if (applicationOpt.isEmpty())
+		{
+			throw new ApplicationNotFoundException("Application with ID " + applicationId + " not found.");
+		}
+
+		ApplicationJpaEntity application = applicationOpt.get();
+		application.setMonthlyCost(newCost);
+
+		return applicationJpaRepository.save(application).toDomainEntity();
+	}
 
 	private final ManageApplicationsDataAccess manageApplicationsDataAccess;
+	private final ApplicationJpaRepository applicationJpaRepository;
+
 }
