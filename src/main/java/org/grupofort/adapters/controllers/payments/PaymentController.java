@@ -1,4 +1,4 @@
-package org.grupofort.adapters.controllers;
+package org.grupofort.adapters.controllers.payments;
 
 import org.grupofort.domain.data_access.exceptions.MismatchingPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;

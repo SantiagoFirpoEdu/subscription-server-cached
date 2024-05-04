@@ -1,4 +1,4 @@
-package org.grupofort.adapters.controllers;
+package org.grupofort.adapters.controllers.payments;
 
 public record RegisterPaymentRequest(
         int dia,
