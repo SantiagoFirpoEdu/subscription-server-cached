@@ -40,16 +40,6 @@ public class UserJpaEntity implements ConvertibleToDomainEntity<User>
 		this.password = password;
 	}
 
-	private Long getId()
-	{
-		return id;
-	}
-
-	private void setId(Long id)
-	{
-		this.id = id;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

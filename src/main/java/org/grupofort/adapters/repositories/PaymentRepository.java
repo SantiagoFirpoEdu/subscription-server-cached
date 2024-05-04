@@ -26,7 +26,7 @@ public class PaymentRepository implements RegisterPaymentDataAccess
     {
         if (paidAmount.compareTo(BigDecimal.ZERO) <= 0)
         {
-            throw new InvalidPaidAmountException("Paid amount must be greater than zero");
+            throw new InvalidPaidAmountException(paidAmount.doubleValue());
         }
 
         PaymentJpaEntity payment = new PaymentJpaEntity(SubscriptionJpaEntity.fromDomainEntity(subscription), paidAmount, paymentDate, "none");

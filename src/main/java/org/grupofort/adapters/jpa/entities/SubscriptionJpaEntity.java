@@ -82,10 +82,6 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	public LocalDate getEndDate() {
-        return endDate;
-    }
-
 	public void setEndDate(LocalDate endDate)
 	{
 		this.endDate = endDate;

@@ -41,11 +41,6 @@ public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer>
 		this.email = email;
 	}
 
-	private void setId(Long id)
-	{
-		this.id = id;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

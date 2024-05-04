@@ -2,8 +2,8 @@ package org.grupofort.domain.data_access.exceptions;
 
 public class InvalidPaidAmountException extends Exception
 {
-	public InvalidPaidAmountException(String message)
+	public InvalidPaidAmountException(double paidAmount)
 	{
-		super(message);
+		super("Invalid paid amount: %s".formatted(paidAmount));
 	}
 }

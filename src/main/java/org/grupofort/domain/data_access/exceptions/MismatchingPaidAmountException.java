@@ -2,8 +2,8 @@ package org.grupofort.domain.data_access.exceptions;
 
 public class MismatchingPaidAmountException extends Exception
 {
-	public MismatchingPaidAmountException(String message)
+	public MismatchingPaidAmountException(double paidAmount, double totalCost)
 	{
-		super(message);
+		super("Mismatching paid amount: %s, total cost: %s".formatted(paidAmount, totalCost));
 	}
 }

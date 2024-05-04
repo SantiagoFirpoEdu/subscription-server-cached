@@ -38,12 +38,13 @@ public class RegisterPayment
 
 		if (paidAmount.compareTo(BigDecimal.ZERO) <= 0)
 		{
-			throw new InvalidPaidAmountException("Paid amount must be greater than zero");
+			throw new InvalidPaidAmountException(paidAmount.doubleValue());
 		}
 
-		if (paidAmount.compareTo(subscription.application().monthlyCost()) != 0)
+		BigDecimal applicationMonthlyCost = subscription.application().monthlyCost();
+		if (paidAmount.compareTo(applicationMonthlyCost) != 0)
 		{
-			throw new MismatchingPaidAmountException("Paid amount must be equal to the application's monthly cost");
+			throw new MismatchingPaidAmountException(paidAmount.doubleValue(), applicationMonthlyCost.doubleValue());
 		}
 
 		registerPaymentDataAccess.registerPayment(date, subscription, paidAmount);

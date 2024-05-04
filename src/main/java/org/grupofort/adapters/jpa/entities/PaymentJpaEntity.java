@@ -37,11 +37,6 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 		return id;
 	}
 
-	private void setId(Long id)
-	{
-		this.id = id;
-	}
-
 	public PaymentJpaEntity(SubscriptionJpaEntity subscription, BigDecimal paidAmount, LocalDate paymentDate, String promotionCode)
 	{
 		this.subscription = subscription;
@@ -77,6 +72,6 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 	@Column(nullable = false)
 	private LocalDate paymentDate;
 
-	@Column(nullable = true)
+	@Column()
 	private String promotionCode;
 }
