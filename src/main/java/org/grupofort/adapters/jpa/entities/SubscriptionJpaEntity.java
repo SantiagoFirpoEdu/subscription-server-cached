@@ -33,6 +33,8 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 												: ESubscriptionStatus.ACTIVE;
 	}
 
+
+
 	public static SubscriptionJpaEntity fromDomainEntity(Subscription domainEntity)
 	{
 		return new SubscriptionJpaEntity(
