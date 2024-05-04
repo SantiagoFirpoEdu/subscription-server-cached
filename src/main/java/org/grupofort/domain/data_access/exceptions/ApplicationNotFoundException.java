@@ -1,11 +1,9 @@
 package org.grupofort.domain.data_access.exceptions;
 
-public class ApplicationNotFoundException extends Throwable
+public class ApplicationNotFoundException extends Exception
 {
     public ApplicationNotFoundException(long applicationId)
     {
-    }
-    public ApplicationNotFoundException(String message) {
-        super(message);
+        super("Application with id %d not found".formatted(applicationId));
     }
 }
