@@ -57,8 +57,13 @@ GET http://localhost:8080/servcad/assinaturas/CANCELADAS
 GET http://localhost:8080/servcad/assinaturas/TODAS
 
 ###
-@customerId = 1
-GET http://localhost:8080/servcad/asscli/{{customerId}}
+GET http://localhost:8080/servcad/asscli/1
+
+###
+GET http://localhost:8080/servcad/asscli/2
+
+###
+GET http://localhost:8080/servcad/asscli/3
 
 ###
 @valorInsuficiente = 10.5
@@ -120,5 +125,5 @@ Content-Type: application/json
 GET http://localhost:8080/assinvalida/{{assinaturaInvalida}}
 
 ###
-@assinaturaValida = 2
+@assinaturaValida = 4
 GET http://localhost:8080/assinvalida/{{assinaturaValida}}
