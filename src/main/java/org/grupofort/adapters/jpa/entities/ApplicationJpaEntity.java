@@ -34,9 +34,14 @@ public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Applicati
 		return id;
 	}
 
-	public void setMonthlyCost(BigDecimal monthlyCost)
+	public BigDecimal getMonthlyCost()
 	{
-		this.monthlyCost = monthlyCost;
+		return monthlyCost;
+	}
+
+	public void setMonthlyCost(BigDecimal newCost)
+	{
+		monthlyCost = newCost;
 	}
 
 	protected ApplicationJpaEntity()

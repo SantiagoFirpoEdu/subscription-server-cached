@@ -21,7 +21,8 @@ insert into subscriptions (customer_id, application_id, start_date, end_date)
 values (1, 1, '2021-02-20', '2021-06-20'),
        (2, 2, '2023-03-29', '2025-07-26'),
        (3, 3, '2015-04-30', '2021-08-23'),
-       (4, 4, '2019-05-19', '2024-09-21');
+       (4, 4, '2019-05-19', '2024-09-21'),
+       (4, 3, '2020-03-13', '2024-05-04');
 
 insert into payments (subscription_id, paid_amount, payment_date)
 values (3, 12.50, '2015-04-30'),

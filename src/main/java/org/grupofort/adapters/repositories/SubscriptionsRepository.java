@@ -33,7 +33,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public Subscription addSubscription(long customerId, long applicationId) throws CustomerNotFoundException, ApplicationNotFoundException
+    public Subscription addSubscription(long customerId, long applicationId, LocalDate startDate, LocalDate endDate) throws CustomerNotFoundException, ApplicationNotFoundException
     {
         Optional<ApplicationJpaEntity> application = applicationJpaRepository.findById(applicationId);
 
@@ -53,8 +53,8 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
         (
             application.get(),
             customer.get(),
-            LocalDate.now(),
-            LocalDate.now().plusDays(7)
+            startDate,
+            endDate
         );
 
         return subscriptionJpaRepository.save(subscription).toDomainEntity();
