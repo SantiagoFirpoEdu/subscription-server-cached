@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class QuerySubscription
@@ -19,6 +20,11 @@ public class QuerySubscription
 	public List<Subscription> findAll()
 	{
 		return querySubscriptionsDataAccess.findAll();
+	}
+
+	public Optional<Subscription> findById(long subscriptionId)
+	{
+		return querySubscriptionsDataAccess.findById(subscriptionId);
 	}
 
 	public List<Subscription> findAllByFilter(ESubscriptionStatusFilter subscriptionStatusFilter)

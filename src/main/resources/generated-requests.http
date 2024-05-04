@@ -61,6 +61,7 @@ GET http://localhost:8080/servcad/assinaturas/TODAS
 GET http://localhost:8080/servcad/asscli/{{customerId}}
 
 ###
+@valorInsuficiente = 10.5
 POST http://localhost:8080/registrarpagamento
 Content-Type: application/json
 
@@ -69,12 +70,40 @@ Content-Type: application/json
   "mes": 2,
   "ano": 2024,
   "codass": 1,
-  "valorPago": 10.5
+  "valorPago": {{valorInsuficiente}}
 }
+
+###
+@valorExcedente = 9999
+POST http://localhost:8080/registrarpagamento
+Content-Type: application/json
+
+{
+  "dia": 10,
+  "mes": 2,
+  "ano": 2024,
+  "codass": 1,
+  "valorPago": {{valorExcedente}}
+}
+
+###
+@valorInvalido = -1
+POST http://localhost:8080/registrarpagamento
+Content-Type: application/json
+
+{
+  "dia": 10,
+  "mes": 2,
+  "ano": 2024,
+  "codass": 1,
+  "valorPago": {{valorInvalido}}
+}
+
 
 <> 2024-04-27T140954.500.json
 
 ###
+@valorValido = 16.5
 POST http://localhost:8080/registrarpagamento
 Content-Type: application/json
 
@@ -83,5 +112,13 @@ Content-Type: application/json
   "mes": 2,
   "ano": 2024,
   "codass": 1,
-  "valorPago": 16.5
+  "valorPago": {{valorValido}}
 }
+
+###
+@assinaturaInvalida = 1
+GET http://localhost:8080/assinvalida/{{assinaturaInvalida}}
+
+###
+@assinaturaValida = 2
+GET http://localhost:8080/assinvalida/{{assinaturaValida}}
