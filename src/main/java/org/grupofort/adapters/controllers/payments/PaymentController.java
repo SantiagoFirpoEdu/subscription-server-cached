@@ -4,6 +4,7 @@ import org.grupofort.domain.data_access.exceptions.MismatchingPaidAmountExceptio
 import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
 import org.grupofort.application.use_cases.execute_payment.RegisterPayment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +16,12 @@ import java.time.LocalDate;
 @RestController
 public class PaymentController
 {
+	@Autowired
     public PaymentController(RegisterPayment registerPayment)
     {
-
         this.registerPayment = registerPayment;
     }
+
     @PostMapping(path = "/registrarpagamento")
     public void registerPayment(@RequestBody @NonNull RegisterPaymentRequest registerPaymentRequest) throws SubscriptionNotFoundException
     {
