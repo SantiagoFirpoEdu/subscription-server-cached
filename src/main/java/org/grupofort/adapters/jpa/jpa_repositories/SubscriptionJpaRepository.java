@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface SubscriptionJpaRepository extends JpaRepository<SubscriptionJpaEntity, Long>
 {
-	@Query("SELECT s FROM SubscriptionJpaEntity s WHERE s.id = :customerId")
+	@Query("SELECT s FROM SubscriptionJpaEntity s WHERE s.customer.id = :customerId")
 	List<SubscriptionJpaEntity> getSubscriptionsForCustomer(long customerId);
 
 	@Query("SELECT s FROM SubscriptionJpaEntity s " +

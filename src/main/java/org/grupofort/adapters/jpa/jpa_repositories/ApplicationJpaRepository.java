@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ApplicationJpaRepository extends JpaRepository<ApplicationJpaEntity, Long>
 {
-	@Query("SELECT s FROM SubscriptionJpaEntity s WHERE s.id = :applicationId")
+	@Query("SELECT s FROM SubscriptionJpaEntity s WHERE s.application.id = :applicationId")
 	List<SubscriptionJpaEntity> getSubscriptionsForApplication(long applicationId);
 }
