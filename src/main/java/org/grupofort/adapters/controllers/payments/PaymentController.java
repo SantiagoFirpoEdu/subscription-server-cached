@@ -23,16 +23,21 @@ public class PaymentController
     }
 
     @PostMapping(path = "/registrarpagamento")
-    public void registerPayment(@RequestBody @NonNull RegisterPaymentRequest registerPaymentRequest) throws SubscriptionNotFoundException
+    public PaymentResponse registerPayment(@RequestBody @NonNull RegisterPaymentRequest registerPaymentRequest) throws SubscriptionNotFoundException
     {
 	    try
 	    {
 		    registerPayment.registerPayment(LocalDate.of(registerPaymentRequest.ano(), registerPaymentRequest.mes(), registerPaymentRequest.dia()), registerPaymentRequest.codass(), BigDecimal.valueOf(registerPaymentRequest.valorPago()));
+           return new PaymentResponse(EPaymentStatus.PAGAMENTO_OK,0);
 	    }
-	    catch (InvalidPaidAmountException | MismatchingPaidAmountException e)
+	    catch (InvalidPaidAmountException e)
 	    {
-            //TODO (Lucas): Implementar tratamento de erro e retorno
-	    }
+            return new PaymentResponse(EPaymentStatus.VALOR_INCORRETO, 0);
+        }
+        catch (MismatchingPaidAmountException e)
+        {
+            return new PaymentResponse(EPaymentStatus.VALOR_INCORRETO, registerPaymentRequest.valorPago());
+        }
     }
 
     private final RegisterPayment registerPayment;
