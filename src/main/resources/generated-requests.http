@@ -12,25 +12,6 @@ GET http://localhost:8080/servcad/aplicativos
 <> 2024-04-27T140247.200.json
 
 ###
-@applicationId = 4
-GET http://localhost:8080/servcad/assapp/{{applicationId}}
-
-<> 2024-04-27T141334.200.json
-<> 2024-04-27T141332.200.json
-<> 2024-04-27T140518.200.json
-<> 2024-04-27T140338.500.json
-
-###
-POST http://localhost:8080/servcad/aplicativos/atualizacusto/{{applicationId}}
-Content-Type: application/json
-
-{
-  "custo": 10
-}
-
-<> 2024-04-27T141336.200.json
-
-###
 POST http://localhost:8080/servcad/assinaturas
 Content-Type: application/json
 
@@ -41,6 +22,16 @@ Content-Type: application/json
 
 <> 2024-04-27T141354.500.json
 <> 2024-04-27T141340.500.json
+
+###
+POST http://localhost:8080/servcad/aplicativos/atualizacusto/{{applicationId}}
+Content-Type: application/json
+
+{
+  "custo": 10
+}
+
+<> 2024-04-27T141336.200.json
 
 ###
 GET http://localhost:8080/servcad/assinaturas
@@ -64,6 +55,15 @@ GET http://localhost:8080/servcad/asscli/2
 
 ###
 GET http://localhost:8080/servcad/asscli/3
+
+###
+@applicationId = 4
+GET http://localhost:8080/servcad/assapp/{{applicationId}}
+
+<> 2024-04-27T141334.200.json
+<> 2024-04-27T141332.200.json
+<> 2024-04-27T140518.200.json
+<> 2024-04-27T140338.500.json
 
 ###
 @valorInsuficiente = 10.5
