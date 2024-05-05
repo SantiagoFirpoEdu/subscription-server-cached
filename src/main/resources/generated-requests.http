@@ -74,7 +74,7 @@ Content-Type: application/json
   "dia": 12,
   "mes": 5,
   "ano": 2024,
-  "codass": 1,
+  "codass": 2,
   "valorPago": {{valorInsuficiente}}
 }
 
@@ -87,7 +87,7 @@ Content-Type: application/json
   "dia": 12,
   "mes": 5,
   "ano": 2024,
-  "codass": 1,
+  "codass": 2,
   "valorPago": {{valorExcedente}}
 }
 
@@ -100,7 +100,7 @@ Content-Type: application/json
   "dia": 12,
   "mes": 5,
   "ano": 2024,
-  "codass": 1,
+  "codass": 2,
   "valorPago": {{valorInvalido}}
 }
 
@@ -108,7 +108,7 @@ Content-Type: application/json
 <> 2024-04-27T140954.500.json
 
 ###
-@valorValido = 16.5
+@valorValido = 21.5
 POST http://localhost:8080/registrarpagamento
 Content-Type: application/json
 
@@ -116,7 +116,7 @@ Content-Type: application/json
   "dia": 12,
   "mes": 5,
   "ano": 2024,
-  "codass": 1,
+  "codass": 2,
   "valorPago": {{valorValido}}
 }
 
