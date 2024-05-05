@@ -1,9 +1,9 @@
 package org.grupofort.adapters.jpa;
 
-import jakarta.annotation.Nonnull;
+import org.springframework.lang.NonNull;
 
 public interface ConvertibleToDomainEntity<DomainEntityType>
 {
-	@Nonnull
+	@NonNull
 	DomainEntityType toDomainEntity();
 }

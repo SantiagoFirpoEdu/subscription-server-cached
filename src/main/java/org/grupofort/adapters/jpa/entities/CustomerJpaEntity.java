@@ -1,6 +1,5 @@
 package org.grupofort.adapters.jpa.entities;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.Customer;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
@@ -11,7 +10,7 @@ import org.springframework.lang.NonNull;
 public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer>
 {
 	@Override
-	public @Nonnull Customer toDomainEntity()
+	public @NonNull Customer toDomainEntity()
 	{
 		return new Customer
 				       (

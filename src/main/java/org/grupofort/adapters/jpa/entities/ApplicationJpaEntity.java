@@ -1,7 +1,6 @@
 package org.grupofort.adapters.jpa.entities;
 
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.Application;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
@@ -13,7 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "applications")
 public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Application>
 {
-	@Nonnull
+	@NonNull
 	@Override
 	public Application toDomainEntity()
 	{

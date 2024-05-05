@@ -1,6 +1,5 @@
 package org.grupofort.adapters.jpa.entities;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.ESubscriptionStatus;
 import org.grupofort.domain.entities.Subscription;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "subscriptions")
 public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscription>
 {
-	@Nonnull
+	@NonNull
 	@Override
 	public Subscription toDomainEntity()
 	{

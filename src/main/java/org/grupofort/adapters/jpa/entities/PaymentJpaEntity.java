@@ -1,6 +1,5 @@
 package org.grupofort.adapters.jpa.entities;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.Payment;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
@@ -14,7 +13,7 @@ import java.util.Optional;
 @Table(name = "payments")
 public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 {
-	@Nonnull
+	@NonNull
 	@Override
 	public Payment toDomainEntity()
 	{
