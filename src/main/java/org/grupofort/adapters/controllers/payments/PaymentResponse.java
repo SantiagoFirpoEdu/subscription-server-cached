@@ -1,5 +1,7 @@
 package org.grupofort.adapters.controllers.payments;
 
-public record PaymentResponse(EPaymentStatus status, double returnedValue)
+import java.time.LocalDate;
+
+public record PaymentResponse(EPaymentStatus status, LocalDate endDate, double returnedValue)
 {
 }

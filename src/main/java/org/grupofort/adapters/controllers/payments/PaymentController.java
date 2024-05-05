@@ -1,9 +1,11 @@
 package org.grupofort.adapters.controllers.payments;
 
+import org.grupofort.application.use_cases.subscriptions.query_subscription.QuerySubscription;
 import org.grupofort.domain.data_access.exceptions.MismatchingPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
 import org.grupofort.application.use_cases.execute_payment.RegisterPayment;
+import org.grupofort.domain.entities.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -14,14 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @RestController
 public class PaymentController
 {
 	@Autowired
-    public PaymentController(RegisterPayment registerPayment)
+    public PaymentController(RegisterPayment registerPayment, QuerySubscription querySubscription)
     {
         this.registerPayment = registerPayment;
+	    this.querySubscription = querySubscription;
     }
 
     @PostMapping(path = "/registrarpagamento")
@@ -30,18 +34,32 @@ public class PaymentController
     {
 	    try
 	    {
-		    registerPayment.registerPayment(LocalDate.of(registerPaymentRequest.ano(), registerPaymentRequest.mes(), registerPaymentRequest.dia()), registerPaymentRequest.codass(), BigDecimal.valueOf(registerPaymentRequest.valorPago()));
-			return new PaymentResponse(EPaymentStatus.OK_PAYMENT,0);
+		    LocalDate newEndDate = registerPayment.registerPayment(LocalDate.of(registerPaymentRequest.ano(), registerPaymentRequest.mes(), registerPaymentRequest.dia()), registerPaymentRequest.codass(), BigDecimal.valueOf(registerPaymentRequest.valorPago()));
+			return new PaymentResponse(EPaymentStatus.OK_PAYMENT, newEndDate,0.0);
 	    }
 	    catch (InvalidPaidAmountException e)
 	    {
-            return new PaymentResponse(EPaymentStatus.INCORRECT_AMOUNT, 0);
+		    Optional<Subscription> subscription = querySubscription.findById(registerPaymentRequest.codass());
+
+			if (subscription.isEmpty())
+		    {
+				throw new SubscriptionNotFoundException(registerPaymentRequest.codass());
+		    }
+
+		    return new PaymentResponse(EPaymentStatus.INCORRECT_AMOUNT, subscription.get().endDate(), 0.0);
         }
         catch (MismatchingPaidAmountException e)
         {
-            return new PaymentResponse(EPaymentStatus.INCORRECT_AMOUNT, registerPaymentRequest.valorPago());
+	        Optional<Subscription> subscription = querySubscription.findById(registerPaymentRequest.codass());
+
+	        if (subscription.isEmpty())
+	        {
+		        throw new SubscriptionNotFoundException(registerPaymentRequest.codass());
+	        }
+            return new PaymentResponse(EPaymentStatus.INCORRECT_AMOUNT, subscription.get().endDate(), registerPaymentRequest.valorPago());
         }
     }
 
     private final RegisterPayment registerPayment;
+	private final QuerySubscription querySubscription;
 }

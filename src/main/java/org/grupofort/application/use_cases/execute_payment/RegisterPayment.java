@@ -25,7 +25,7 @@ public class RegisterPayment
 		this.querySubscriptionsDataAccess = querySubscriptionsDataAccess;
 	}
 
-	public void registerPayment(LocalDate date, long subscriptionId, BigDecimal paidAmount) throws SubscriptionNotFoundException, InvalidPaidAmountException, MismatchingPaidAmountException
+	public LocalDate registerPayment(LocalDate date, long subscriptionId, BigDecimal paidAmount) throws SubscriptionNotFoundException, InvalidPaidAmountException, MismatchingPaidAmountException
 	{
 		Optional<Subscription> foundSubscription = querySubscriptionsDataAccess.findById(subscriptionId);
 
@@ -50,7 +50,9 @@ public class RegisterPayment
 		registerPaymentDataAccess.registerPayment(date, subscription, paidAmount);
 
 		LocalDate dateToUse = subscription.endDate().isAfter(date) ? subscription.endDate() : date;
-		updateSubscriptionDataAccess.updateSubscriptionEndDate(subscriptionId, dateToUse.plusMonths(1));
+		LocalDate newEndDate = dateToUse.plusMonths(1);
+		updateSubscriptionDataAccess.updateSubscriptionEndDate(subscriptionId, newEndDate);
+		return newEndDate;
 	}
 
 	private final RegisterPaymentDataAccess registerPaymentDataAccess;
