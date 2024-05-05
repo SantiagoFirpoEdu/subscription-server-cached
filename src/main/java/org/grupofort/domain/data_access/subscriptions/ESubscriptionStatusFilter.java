@@ -1,4 +1,6 @@
-package org.grupofort.application.use_cases.subscriptions.query_subscription;
+package org.grupofort.domain.data_access.subscriptions;
+
+import org.grupofort.domain.data_access.exceptions.InvalidSubscriptionStatusException;
 
 public enum ESubscriptionStatusFilter
 {

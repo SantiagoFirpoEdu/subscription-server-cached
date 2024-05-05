@@ -1,7 +1,7 @@
 package org.grupofort.application.use_cases.execute_payment;
 
 import org.grupofort.domain.data_access.exceptions.MismatchingPaidAmountException;
-import org.grupofort.domain.data_access.QuerySubscriptionsDataAccess;
+import org.grupofort.domain.data_access.subscriptions.QuerySubscriptionsDataAccess;
 import org.grupofort.domain.data_access.RegisterPaymentDataAccess;
 import org.grupofort.domain.data_access.UpdateSubscriptionDataAccess;
 import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;

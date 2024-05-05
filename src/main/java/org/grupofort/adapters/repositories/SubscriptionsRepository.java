@@ -12,8 +12,8 @@ import org.grupofort.adapters.jpa.jpa_repositories.CustomerJpaRepository;
 import org.grupofort.adapters.jpa.jpa_repositories.SubscriptionJpaRepository;
 import org.grupofort.domain.data_access.AddSubscriptionDataAccess;
 import org.grupofort.domain.data_access.UpdateSubscriptionDataAccess;
-import org.grupofort.application.use_cases.subscriptions.query_subscription.ESubscriptionStatusFilter;
-import org.grupofort.domain.data_access.QuerySubscriptionsDataAccess;
+import org.grupofort.domain.data_access.subscriptions.ESubscriptionStatusFilter;
+import org.grupofort.domain.data_access.subscriptions.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
