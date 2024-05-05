@@ -5,6 +5,7 @@ import org.grupofort.domain.entities.Application;
 import org.grupofort.domain.data_access.ManageApplicationsDataAccess;
 import org.grupofort.domain.data_access.exceptions.ApplicationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ public class ManageApplications
 		this.manageApplicationsDataAccess = manageApplicationsDataAccess;
 	}
 
-	public Application updateApplicationCost(long applicationId, BigDecimal newCost) throws ApplicationNotFoundException, InvalidCostException
+	public @NonNull Application updateApplicationCost(long applicationId, BigDecimal newCost) throws ApplicationNotFoundException, InvalidCostException
 	{
 		return manageApplicationsDataAccess.updateApplicationCost(applicationId, newCost);
 	}

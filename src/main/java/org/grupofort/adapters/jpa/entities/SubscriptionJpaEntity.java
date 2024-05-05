@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.grupofort.domain.entities.ESubscriptionStatus;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
@@ -27,7 +28,7 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 				       );
 	}
 
-	public ESubscriptionStatus getStatus()
+	public @NonNull ESubscriptionStatus getStatus()
 	{
         return LocalDate.now().isAfter(endDate) ? ESubscriptionStatus.CANCELLED
 												: ESubscriptionStatus.ACTIVE;
@@ -35,7 +36,7 @@ public class SubscriptionJpaEntity implements ConvertibleToDomainEntity<Subscrip
 
 
 
-	public static SubscriptionJpaEntity fromDomainEntity(Subscription domainEntity)
+	public static @NonNull SubscriptionJpaEntity fromDomainEntity(@NonNull Subscription domainEntity)
 	{
 		return new SubscriptionJpaEntity(
 			domainEntity.id(),

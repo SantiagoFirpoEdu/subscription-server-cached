@@ -4,6 +4,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.Customer;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "customers")
@@ -20,7 +21,7 @@ public class CustomerJpaEntity implements ConvertibleToDomainEntity<Customer>
 				       );
 	}
 
-	public static CustomerJpaEntity fromDomainEntity(Customer domainEntity)
+	public static @NonNull CustomerJpaEntity fromDomainEntity(@NonNull Customer domainEntity)
 	{
 		return new CustomerJpaEntity(domainEntity.id(), domainEntity.name(), domainEntity.email());
 	}

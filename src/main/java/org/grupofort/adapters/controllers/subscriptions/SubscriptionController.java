@@ -32,7 +32,7 @@ public class SubscriptionController
 	}
 
 	@GetMapping("/{filterType}")
-	public List<Subscription> getAllSubscriptionsByFilter(@PathVariable String filterType) throws InvalidSubscriptionStatusException
+	public List<Subscription> getAllSubscriptionsByFilter(@PathVariable @NonNull String filterType) throws InvalidSubscriptionStatusException
 	{
 		return querySubscriptions.findAllByFilter(ESubscriptionStatusFilter.convertFromLocalized(filterType));
 	}

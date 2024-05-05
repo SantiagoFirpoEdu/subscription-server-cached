@@ -4,6 +4,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.Payment;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
+import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ public class PaymentJpaEntity implements ConvertibleToDomainEntity<Payment>
 		);
 	}
 
-	public static PaymentJpaEntity fromDomainEntity(Payment domainEntity)
+	public static @NonNull PaymentJpaEntity fromDomainEntity(@NonNull Payment domainEntity)
 	{
 		return new PaymentJpaEntity(domainEntity.id(), SubscriptionJpaEntity.fromDomainEntity(domainEntity.subscription()), domainEntity.paidAmount(), domainEntity.paymentDate(), domainEntity.promotionCode().orElse("none"));
 	}

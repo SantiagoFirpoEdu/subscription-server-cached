@@ -5,6 +5,7 @@ import org.grupofort.adapters.jpa.entities.CustomerJpaEntity;
 import org.grupofort.adapters.jpa.jpa_repositories.CustomerJpaRepository;
 import org.grupofort.domain.data_access.QueryCustomersDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class CustomerRepository implements QueryCustomersDataAccess
 	}
 
 	@Override
-	public List<Customer> findAll()
+	public @NonNull List<Customer> findAll()
 	{
 		return customerJpaRepository.findAll()
 								    .stream()

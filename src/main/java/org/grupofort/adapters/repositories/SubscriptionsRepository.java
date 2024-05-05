@@ -15,6 +15,7 @@ import org.grupofort.domain.data_access.UpdateSubscriptionDataAccess;
 import org.grupofort.domain.data_access.subscriptions.ESubscriptionStatusFilter;
 import org.grupofort.domain.data_access.subscriptions.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public Subscription addSubscription(long customerId, long applicationId, LocalDate startDate, LocalDate endDate) throws CustomerNotFoundException, ApplicationNotFoundException
+    public @NonNull Subscription addSubscription(long customerId, long applicationId, LocalDate startDate, LocalDate endDate) throws CustomerNotFoundException, ApplicationNotFoundException
     {
         Optional<ApplicationJpaEntity> application = applicationJpaRepository.findById(applicationId);
 
@@ -61,7 +62,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public List<Subscription> querySubscriptions(ESubscriptionStatusFilter statusFilter)
+    public @NonNull List<Subscription> querySubscriptions(@NonNull ESubscriptionStatusFilter statusFilter)
     {
         return subscriptionJpaRepository.querySubscriptions(statusFilter.toString())
                                         .stream()
@@ -70,7 +71,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public List<Subscription> getSubscriptionsForCustomer(long customerId)
+    public @NonNull List<Subscription> getSubscriptionsForCustomer(long customerId)
     {
         return subscriptionJpaRepository.getSubscriptionsForCustomer(customerId)
                                         .stream()
@@ -91,7 +92,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public List<Subscription> findAll()
+    public @NonNull List<Subscription> findAll()
     {
         return subscriptionJpaRepository.findAll()
                                         .stream()
@@ -100,7 +101,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public Optional<Subscription> findById(long subscriptionId)
+    public @NonNull Optional<Subscription> findById(long subscriptionId)
     {
         return subscriptionJpaRepository.findById(subscriptionId).map(SubscriptionJpaEntity::toDomainEntity);
     }
@@ -110,7 +111,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     private final ApplicationJpaRepository applicationJpaRepository;
 
     @Override
-    public Subscription updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate) throws SubscriptionNotFoundException
+    public @NonNull Subscription updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate) throws SubscriptionNotFoundException
     {
         Optional<SubscriptionJpaEntity> existingSubscription = subscriptionJpaRepository.findById(subscriptionId);
         if (existingSubscription.isEmpty())

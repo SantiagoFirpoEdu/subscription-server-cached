@@ -30,7 +30,7 @@ public class PaymentController
 
     @PostMapping(path = "/registrarpagamento")
     @ResponseStatus(HttpStatus.CREATED)
-    public PaymentResponse registerPayment(@RequestBody @NonNull RegisterPaymentRequest registerPaymentRequest) throws SubscriptionNotFoundException
+    public @NonNull PaymentResponse registerPayment(@RequestBody @NonNull RegisterPaymentRequest registerPaymentRequest) throws SubscriptionNotFoundException
     {
 	    try
 	    {

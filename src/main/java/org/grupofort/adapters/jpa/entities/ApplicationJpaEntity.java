@@ -5,6 +5,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.Application;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
+import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
 
@@ -24,7 +25,7 @@ public class ApplicationJpaEntity implements ConvertibleToDomainEntity<Applicati
 				       );
 	}
 
-	public static ApplicationJpaEntity fromDomainEntity(Application domainEntity)
+	public static @NonNull ApplicationJpaEntity fromDomainEntity(@NonNull Application domainEntity)
 	{
 		return new ApplicationJpaEntity(domainEntity.id(), domainEntity.name(), domainEntity.monthlyCost());
 	}

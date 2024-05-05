@@ -8,6 +8,7 @@ import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
 import org.grupofort.domain.entities.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -25,7 +26,7 @@ public class RegisterPayment
 		this.querySubscriptionsDataAccess = querySubscriptionsDataAccess;
 	}
 
-	public LocalDate registerPayment(LocalDate date, long subscriptionId, BigDecimal paidAmount) throws SubscriptionNotFoundException, InvalidPaidAmountException, MismatchingPaidAmountException
+	public @NonNull LocalDate registerPayment(LocalDate date, long subscriptionId, @NonNull BigDecimal paidAmount) throws SubscriptionNotFoundException, InvalidPaidAmountException, MismatchingPaidAmountException
 	{
 		Optional<Subscription> foundSubscription = querySubscriptionsDataAccess.findById(subscriptionId);
 
