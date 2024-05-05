@@ -1,10 +1,10 @@
 package org.grupofort.adapters.controllers.applications;
 
+import org.grupofort.application.use_cases.applications.query_applications.QueryApplications;
 import org.grupofort.domain.entities.Application;
 import org.grupofort.domain.data_access.exceptions.ApplicationNotFoundException;
 import org.grupofort.domain.data_access.exceptions.InvalidCostException;
 import org.grupofort.application.use_cases.applications.manage_applications.ManageApplications;
-import org.grupofort.domain.data_access.QueryApplicationsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -18,16 +18,16 @@ import java.util.List;
 public class ApplicationsController
 {
 	@Autowired
-	public ApplicationsController(QueryApplicationsDataAccess queryApplicationsDataAccess, ManageApplications manageApplications)
+	public ApplicationsController(QueryApplications queryApplications, ManageApplications manageApplications)
 	{
-		this.queryApplicationsDataAccess = queryApplicationsDataAccess;
+		this.queryApplications = queryApplications;
 		this.manageApplications = manageApplications;
 	}
 
 	@GetMapping()
 	public List<Application> getAllApplications()
 	{
-		return queryApplicationsDataAccess.findAll();
+		return queryApplications.findAll();
 	}
 
 	@PostMapping("atualizacusto/{applicationId}")
@@ -37,6 +37,6 @@ public class ApplicationsController
 		return manageApplications.updateApplicationCost(applicationId, BigDecimal.valueOf(newCost.custo()));
 	}
 
-	private final QueryApplicationsDataAccess queryApplicationsDataAccess;
+	private final QueryApplications queryApplications;
 	private final ManageApplications manageApplications;
 }

@@ -1,5 +1,6 @@
 package org.grupofort.adapters.controllers.subscriptions;
 
+import org.grupofort.application.use_cases.subscriptions.query_subscription.QuerySubscription;
 import org.grupofort.domain.entities.Subscription;
 import org.grupofort.domain.data_access.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.List;
 public class SubscriptionsCustomersController
 {
 	@Autowired
-	public SubscriptionsCustomersController(QuerySubscriptionsDataAccess querySubscriptions)
+	public SubscriptionsCustomersController(QuerySubscription querySubscriptions)
 	{
 		this.querySubscriptions = querySubscriptions;
 	}
@@ -26,5 +27,5 @@ public class SubscriptionsCustomersController
 		return querySubscriptions.getSubscriptionsForCustomer(customerId);
 	}
 
-	private final QuerySubscriptionsDataAccess querySubscriptions;
+	private final QuerySubscription querySubscriptions;
 }

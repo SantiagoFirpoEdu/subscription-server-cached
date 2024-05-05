@@ -32,5 +32,10 @@ public class QuerySubscription
 		return querySubscriptionsDataAccess.querySubscriptions(subscriptionStatusFilter);
 	}
 
+	public List<Subscription> getSubscriptionsForCustomer(long customerId)
+	{
+		return querySubscriptionsDataAccess.getSubscriptionsForCustomer(customerId);
+	}
+
 	private final QuerySubscriptionsDataAccess querySubscriptionsDataAccess;
 }
