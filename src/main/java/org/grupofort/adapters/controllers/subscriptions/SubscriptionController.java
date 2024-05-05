@@ -22,7 +22,7 @@ public class SubscriptionController
 	@ResponseStatus(HttpStatus.CREATED)
 	public @NonNull Subscription createSubscription(@RequestBody @NonNull CreateSubscriptionRequest createSubscriptionRequest) throws ApplicationNotFoundException, CustomerNotFoundException
 	{
-		return subscriptionManagement.addSubscription(createSubscriptionRequest.customerId(), createSubscriptionRequest.applicationId());
+		return subscriptionManagement.addSubscription(createSubscriptionRequest.codigoCliente(), createSubscriptionRequest.codigoAplicativo());
 	}
 
 	@GetMapping()

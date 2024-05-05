@@ -16,8 +16,8 @@ POST http://localhost:8080/servcad/assinaturas
 Content-Type: application/json
 
 {
-  "customerId": 1,
-  "applicationId": 1
+  "codigoCliente": 1,
+  "codigoAplicativo": 1
 }
 
 <> 2024-04-27T141354.500.json

@@ -31,15 +31,15 @@ public class PaymentController
 	    try
 	    {
 		    registerPayment.registerPayment(LocalDate.of(registerPaymentRequest.ano(), registerPaymentRequest.mes(), registerPaymentRequest.dia()), registerPaymentRequest.codass(), BigDecimal.valueOf(registerPaymentRequest.valorPago()));
-			return new PaymentResponse(EPaymentStatus.PAGAMENTO_OK,0);
+			return new PaymentResponse(EPaymentStatus.OK_PAYMENT,0);
 	    }
 	    catch (InvalidPaidAmountException e)
 	    {
-            return new PaymentResponse(EPaymentStatus.VALOR_INCORRETO, 0);
+            return new PaymentResponse(EPaymentStatus.INCORRECT_AMOUNT, 0);
         }
         catch (MismatchingPaidAmountException e)
         {
-            return new PaymentResponse(EPaymentStatus.VALOR_INCORRETO, registerPaymentRequest.valorPago());
+            return new PaymentResponse(EPaymentStatus.INCORRECT_AMOUNT, registerPaymentRequest.valorPago());
         }
     }
 

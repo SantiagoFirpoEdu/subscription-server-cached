@@ -22,8 +22,8 @@ public class IsSubscriptionValidController
 		this.querySubscription = querySubscription;
 	}
 
-	@GetMapping("/{codass}")
-	public boolean isSubscriptionValid(@PathVariable("codass") long subscriptionId) throws SubscriptionNotFoundException
+	@GetMapping("/{subscriptionId}")
+	public boolean isSubscriptionValid(@PathVariable long subscriptionId) throws SubscriptionNotFoundException
 	{
 		Optional<Subscription> foundSubscription = querySubscription.findById(subscriptionId);
 
