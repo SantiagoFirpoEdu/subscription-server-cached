@@ -53,6 +53,7 @@ public class RegisterPayment
 		LocalDate dateToUse = subscription.endDate().isAfter(date) ? subscription.endDate() : date;
 		LocalDate newEndDate = dateToUse.plusMonths(1);
 		updateSubscriptionDataAccess.updateSubscriptionEndDate(subscriptionId, newEndDate);
+
 		return newEndDate;
 	}
 
