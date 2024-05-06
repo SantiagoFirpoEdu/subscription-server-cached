@@ -21,6 +21,7 @@ public class SubscriptionManagement
 	public Subscription addSubscription(long customerId, long applicationId) throws ApplicationNotFoundException, CustomerNotFoundException
 	{
         LocalDate now = LocalDate.now();
+
         return subscriptionDataAccess.addSubscription(customerId, applicationId, now, now.plusDays(7));
 	}
 

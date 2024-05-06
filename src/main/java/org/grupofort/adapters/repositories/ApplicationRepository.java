@@ -44,6 +44,7 @@ public class ApplicationRepository implements ManageApplicationsDataAccess, Quer
         {
 			ApplicationJpaEntity applicationValue = existingApplication.get();
             applicationValue.setMonthlyCost(newCost);
+
             return applicationJpaRepository.save(applicationValue).toDomainEntity();
         }
     }

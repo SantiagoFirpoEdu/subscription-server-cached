@@ -109,6 +109,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
 
         SubscriptionJpaEntity subscription = existingSubscription.get();
         subscription.setEndDate(newEndDate);
+
         return subscriptionJpaRepository.save(subscription).toDomainEntity();
     }
 }

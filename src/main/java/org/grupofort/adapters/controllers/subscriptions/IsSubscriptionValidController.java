@@ -33,6 +33,7 @@ public class IsSubscriptionValidController
 		}
 
 		Subscription subscription = foundSubscription.get();
+
 		return subscription.status() == ESubscriptionStatus.ACTIVE;
 	}
 
