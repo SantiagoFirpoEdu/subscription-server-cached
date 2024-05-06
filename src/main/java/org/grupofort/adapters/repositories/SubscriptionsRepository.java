@@ -80,18 +80,6 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     }
 
     @Override
-    public boolean isSubscriptionActive(long subscriptionId) throws SubscriptionNotFoundException
-    {
-	    Optional<SubscriptionJpaEntity> found = subscriptionJpaRepository.findById(subscriptionId);
-        if (found.isEmpty())
-        {
-            throw new SubscriptionNotFoundException(subscriptionId);
-        }
-
-        return found.get().toDomainEntity().endDate().isAfter(LocalDate.now());
-    }
-
-    @Override
     public @NonNull List<Subscription> findAll()
     {
         return subscriptionJpaRepository.findAll()

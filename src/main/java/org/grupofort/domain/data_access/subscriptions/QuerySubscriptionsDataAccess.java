@@ -10,7 +10,6 @@ public interface QuerySubscriptionsDataAccess
 {
 	List<Subscription> querySubscriptions(ESubscriptionStatusFilter statusFilter);
 	List<Subscription> getSubscriptionsForCustomer(long customerId);
-	boolean isSubscriptionActive(long subscriptionId) throws SubscriptionNotFoundException;
 
 	List<Subscription> findAll();
 
