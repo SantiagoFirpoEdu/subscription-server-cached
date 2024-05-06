@@ -1,6 +1,5 @@
 package org.grupofort.adapters.jpa.entities;
 
-
 import jakarta.persistence.*;
 import org.grupofort.domain.entities.Application;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;

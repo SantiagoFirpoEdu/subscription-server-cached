@@ -4,4 +4,3 @@ public enum EPaymentStatus
 {
 	OK_PAYMENT, INCORRECT_AMOUNT
 }
-

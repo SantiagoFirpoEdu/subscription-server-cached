@@ -25,5 +25,4 @@ public class ManageApplications
 	}
 
 	private final ManageApplicationsDataAccess manageApplicationsDataAccess;
-
 }

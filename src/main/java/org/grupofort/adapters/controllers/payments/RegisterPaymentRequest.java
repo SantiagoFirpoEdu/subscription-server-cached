@@ -8,5 +8,4 @@ public record RegisterPaymentRequest(
         double valorPago
 )
 {
-
 }
