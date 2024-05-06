@@ -1,7 +1,6 @@
 package org.grupofort.domain.data_access.subscriptions;
 
-import org.grupofort.domain.entities.Subscription;
-import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
+import org.grupofort.domain.entities.subscription.Subscription;
 
 import java.util.List;
 import java.util.Optional;

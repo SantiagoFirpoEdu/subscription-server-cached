@@ -5,7 +5,7 @@ import org.grupofort.domain.data_access.exceptions.MismatchingPaidAmountExceptio
 import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
 import org.grupofort.application.use_cases.execute_payment.RegisterPayment;
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;

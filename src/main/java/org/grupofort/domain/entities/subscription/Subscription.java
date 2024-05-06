@@ -1,4 +1,7 @@
-package org.grupofort.domain.entities;
+package org.grupofort.domain.entities.subscription;
+
+import org.grupofort.domain.entities.Application;
+import org.grupofort.domain.entities.Customer;
 
 import java.time.LocalDate;
 

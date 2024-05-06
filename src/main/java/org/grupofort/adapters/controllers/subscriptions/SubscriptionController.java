@@ -1,6 +1,6 @@
 package org.grupofort.adapters.controllers.subscriptions;
 
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.grupofort.domain.data_access.exceptions.ApplicationNotFoundException;
 import org.grupofort.domain.data_access.exceptions.CustomerNotFoundException;
 import org.grupofort.application.use_cases.subscriptions.manage_subscriptions.SubscriptionManagement;

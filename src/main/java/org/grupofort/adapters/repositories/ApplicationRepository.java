@@ -2,7 +2,7 @@ package org.grupofort.adapters.repositories;
 
 import org.grupofort.adapters.jpa.entities.SubscriptionJpaEntity;
 import org.grupofort.domain.entities.Application;
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.grupofort.adapters.jpa.entities.ApplicationJpaEntity;
 import org.grupofort.domain.data_access.exceptions.ApplicationNotFoundException;
 import org.grupofort.adapters.jpa.jpa_repositories.ApplicationJpaRepository;

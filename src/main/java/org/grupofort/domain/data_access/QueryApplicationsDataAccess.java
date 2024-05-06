@@ -1,7 +1,7 @@
 package org.grupofort.domain.data_access;
 
 import org.grupofort.domain.entities.Application;
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 

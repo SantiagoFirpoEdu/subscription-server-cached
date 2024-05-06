@@ -6,7 +6,7 @@ import org.grupofort.domain.data_access.RegisterPaymentDataAccess;
 import org.grupofort.domain.data_access.UpdateSubscriptionDataAccess;
 import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

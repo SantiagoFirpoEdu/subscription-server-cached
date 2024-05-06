@@ -1,6 +1,6 @@
 package org.grupofort.adapters.repositories;
 
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.grupofort.adapters.jpa.entities.ApplicationJpaEntity;
 import org.grupofort.adapters.jpa.entities.CustomerJpaEntity;
 import org.grupofort.adapters.jpa.entities.SubscriptionJpaEntity;

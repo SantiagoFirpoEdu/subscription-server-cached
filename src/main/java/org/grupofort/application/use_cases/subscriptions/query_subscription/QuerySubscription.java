@@ -1,7 +1,7 @@
 package org.grupofort.application.use_cases.subscriptions.query_subscription;
 
 import org.grupofort.domain.data_access.subscriptions.ESubscriptionStatusFilter;
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.grupofort.domain.data_access.subscriptions.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

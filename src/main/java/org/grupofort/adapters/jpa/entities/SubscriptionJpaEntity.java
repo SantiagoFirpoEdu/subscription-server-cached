@@ -1,8 +1,8 @@
 package org.grupofort.adapters.jpa.entities;
 
 import jakarta.persistence.*;
-import org.grupofort.domain.entities.ESubscriptionStatus;
-import org.grupofort.domain.entities.Subscription;
+import org.grupofort.domain.entities.subscription.ESubscriptionStatus;
+import org.grupofort.domain.entities.subscription.Subscription;
 import org.grupofort.adapters.jpa.ConvertibleToDomainEntity;
 import org.springframework.lang.NonNull;
 
