@@ -1,5 +1,7 @@
 Coisas pra fazer
-- [ ] Respeitar as regras adicionais descritas no projeto (Paola)
-- [ ] Retorno do endpoint de pagamento (Lucas)
+- [X] Respeitar as regras adicionais descritas no projeto (Paola)
+- [X] Retorno do endpoint de pagamento (Lucas)
 - [X] Scripts de dados mock no src/main/resources (Vitor)
-- [ ] Passe geral (Santiago)
+- [X] Passe geral (Santiago)
+
+Todos os endpoints podem ser testados no IntelliJ, por meio do arquivo ```src/main/resources/generated-requests.http```.
