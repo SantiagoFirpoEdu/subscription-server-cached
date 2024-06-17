@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.grupofort</groupId>
-    <artifactId>subscription_server</artifactId>
+    <artifactId>subscription_server_cached</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>subscription_server</name>
     <description>subscription_server</description>
