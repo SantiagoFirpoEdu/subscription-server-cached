@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.grupofort</groupId>
-    <artifactId>discovery-service</artifactId>
+    <artifactId>discovery_service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>discovery-service</name>
