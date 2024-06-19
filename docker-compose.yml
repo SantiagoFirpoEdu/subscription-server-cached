@@ -1,7 +1,7 @@
 services:
   discovery_service:
     build:
-      context: ./discovery-service
+      context: ./discovery_service
     ports:
       - 8761
     networks:

@@ -10,5 +10,5 @@ COPY . .
 
 RUN mvn clean package spring-boot:repackage
 
-RUN chmod +x target/discovery-service-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","target/discovery-service-0.0.1-SNAPSHOT.jar"]
+RUN chmod +x target/subscription_status_cache-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","target/subscription_status_cache-0.0.1-SNAPSHOT.jar"]

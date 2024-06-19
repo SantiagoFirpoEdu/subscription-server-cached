@@ -1,14 +1,14 @@
 FROM amazoncorretto:21-alpine
-# get maven from https://maven.apache.org/download.cgi
+
+WORKDIR app
+
 RUN apk add --no-cache maven
 
-#tag the image
 LABEL authors="Grupo Fort"
 
-# build with maven
-COPY pom.xml .
+COPY . .
+
 RUN mvn clean package spring-boot:repackage
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+RUN chmod +x target/subscription_server-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","target/subscription_server-0.0.1-SNAPSHOT.jar"]
