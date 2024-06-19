@@ -10,6 +10,7 @@
     </parent>
     <groupId>org.grupofort</groupId>
     <artifactId>subscription_server</artifactId>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>subscription_server</name>
     <description>subscription_server</description>
@@ -54,6 +55,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

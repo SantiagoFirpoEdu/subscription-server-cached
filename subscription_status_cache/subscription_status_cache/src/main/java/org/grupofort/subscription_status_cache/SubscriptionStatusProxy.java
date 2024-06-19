@@ -1,4 +1,4 @@
-package com.firpy.subscription_status_cache;
+package org.grupofort.subscription_status_cache;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
