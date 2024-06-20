@@ -1,0 +1,17 @@
+spring:
+    cloud:
+        gateway:
+            routes:
+                - id: subscription-service
+                  uri: lb://subscription-service
+                  predicates:
+                      - Path=/servcad/**
+    application:
+        name: subscription-gateway
+server:
+    port: 8000
+eureka:
+    client:
+        fetch-registry: true
+        serviceUrl:
+            defaultZone: http://localhost:8001/eureka/

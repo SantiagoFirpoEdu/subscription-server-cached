@@ -14,12 +14,7 @@ public class SubscriptionStatusDataAccess
 
     public boolean getSubscriptionStatus(long subscriptionId)
     {
-        if (!subscriptionStatuses.containsKey(subscriptionId))
-        {
-            subscriptionStatuses.put(subscriptionId, subscriptionStatusProxy.getSubscriptionStatus(subscriptionId));
-        }
-
-        return subscriptionStatuses.get(subscriptionId);
+        return subscriptionStatuses.computeIfAbsent(subscriptionId, subscriptionStatusProxy::getSubscriptionStatus);
     }
 
     private final SubscriptionStatusProxy subscriptionStatusProxy;
