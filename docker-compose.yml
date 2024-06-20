@@ -22,7 +22,7 @@ services:
       - eureka
   subscription_server:
     build:
-      context: ./subscription_server
+      context: ./subscription_service
     ports:
       - 8003
     networks:
