@@ -1,5 +1,6 @@
-package org.grupofort.subscription_status_cache;
+package org.grupofort.subscription_status_cache.domain;
 
+import org.grupofort.subscription_status_cache.adapters.SubscriptionStatusProxy;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
