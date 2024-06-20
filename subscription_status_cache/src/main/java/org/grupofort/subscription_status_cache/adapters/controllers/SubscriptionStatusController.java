@@ -13,7 +13,7 @@ public class SubscriptionStatusController
         this.subscriptionStatusDataAccess = subscriptionStatusDataAccess;
     }
 
-    @GetMapping("/subscription-status/{subscriptionId}")
+    @GetMapping("/assinvalida/{subscriptionId}")
     public boolean getSubscriptionStatus(@PathVariable long subscriptionId)
     {
         return subscriptionStatusDataAccess.getSubscriptionStatus(subscriptionId);
