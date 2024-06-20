@@ -94,10 +94,6 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
         return subscriptionJpaRepository.findById(subscriptionId).map(SubscriptionJpaEntity::toDomainEntity);
     }
 
-    private final SubscriptionJpaRepository subscriptionJpaRepository;
-    private final CustomerJpaRepository customerJpaRepository;
-    private final ApplicationJpaRepository applicationJpaRepository;
-
     @Override
     public @NonNull Subscription updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate) throws SubscriptionNotFoundException
     {
@@ -112,4 +108,8 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
 
         return subscriptionJpaRepository.save(subscription).toDomainEntity();
     }
+
+    private final SubscriptionJpaRepository subscriptionJpaRepository;
+    private final CustomerJpaRepository customerJpaRepository;
+    private final ApplicationJpaRepository applicationJpaRepository;
 }
