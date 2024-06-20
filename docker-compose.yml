@@ -20,7 +20,7 @@ services:
       - 8002
     networks:
       - eureka
-  subscription_server:
+  subscription_service:
     build:
       context: ./subscription_service
     ports:
