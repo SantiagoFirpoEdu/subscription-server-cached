@@ -1,4 +1,4 @@
-package org.grupofort.adapters.kafka;
+package org.grupofort.adapters.kafka.config;
 
 import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -14,12 +14,17 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
 
+	public KafkaProducerConfig(KafkaTopicConfig kafkaTopicConfig)
+	{
+		this.kafkaTopicConfig = kafkaTopicConfig;
+	}
+
 	@Bean
 	public ProducerFactory<String, String> producerFactory() {
 		Map<String, Object> configProps = new HashMap<>();
 		configProps.put(
 				ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-				"localhost:9092");
+				kafkaTopicConfig.getBootstrapAddress());
 		configProps.put(
 				ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
 				StringSerializer.class);
@@ -33,4 +38,6 @@ public class KafkaProducerConfig {
 	public KafkaTemplate<String, String> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
 	}
+
+	private final KafkaTopicConfig kafkaTopicConfig;
 }

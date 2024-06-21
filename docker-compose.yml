@@ -21,21 +21,46 @@ services:
   subscription_status_cache:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     build:
       context: ./subscription_status_cache
     ports:
       - 8002
     networks:
       - eureka
+      - kafka
   subscription_service:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     build:
       context: ./subscription_service
     ports:
       - 8003
     networks:
       - eureka
+      - kafka
+  kafka:
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    image: confluentinc/cp-kafka:7.0.1
+    hostname: kafka
+    ports:
+      - 9092
+    networks:
+      - kafka
+      - zookeeper
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.0.1
+    hostname: zookeeper
+    ports:
+      - 2181
+    networks:
+      - zookeeper
 networks:
   eureka:
+    driver: bridge
+  kafka:
+    driver: bridge
+  zookeeper:
     driver: bridge

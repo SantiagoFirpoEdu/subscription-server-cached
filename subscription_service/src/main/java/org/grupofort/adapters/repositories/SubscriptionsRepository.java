@@ -1,5 +1,6 @@
 package org.grupofort.adapters.repositories;
 
+import org.grupofort.domain.entities.subscription.ESubscriptionStatus;
 import org.grupofort.domain.entities.subscription.Subscription;
 import org.grupofort.adapters.jpa.entities.ApplicationJpaEntity;
 import org.grupofort.adapters.jpa.entities.CustomerJpaEntity;
@@ -15,6 +16,7 @@ import org.grupofort.domain.data_access.UpdateSubscriptionDataAccess;
 import org.grupofort.domain.data_access.subscriptions.ESubscriptionStatusFilter;
 import org.grupofort.domain.data_access.subscriptions.QuerySubscriptionsDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -26,9 +28,10 @@ import java.util.Optional;
 public class SubscriptionsRepository implements AddSubscriptionDataAccess, QuerySubscriptionsDataAccess, UpdateSubscriptionDataAccess
 {
     @Autowired
-    public SubscriptionsRepository(SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
+    public SubscriptionsRepository(KafkaTemplate<String, String> kafkaTemplate, SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
     {
-        this.subscriptionJpaRepository = subscriptionJpaRepository;
+	    this.kafkaTemplate = kafkaTemplate;
+	    this.subscriptionJpaRepository = subscriptionJpaRepository;
         this.customerJpaRepository = customerJpaRepository;
         this.applicationJpaRepository = applicationJpaRepository;
     }
@@ -109,6 +112,13 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
         return subscriptionJpaRepository.save(subscription).toDomainEntity();
     }
 
+    @Override
+    public void notifySubscriptionStatusChanged(long subscriptionId, @NonNull ESubscriptionStatus newStatus)
+    {
+        kafkaTemplate.send("subscription-status-changed", "%d,%s".formatted(subscriptionId, newStatus));
+    }
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
     private final SubscriptionJpaRepository subscriptionJpaRepository;
     private final CustomerJpaRepository customerJpaRepository;
     private final ApplicationJpaRepository applicationJpaRepository;
