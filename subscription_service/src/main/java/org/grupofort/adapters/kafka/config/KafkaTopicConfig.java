@@ -25,6 +25,6 @@ public class KafkaTopicConfig
 		return bootstrapAddress;
 	}
 
-	@Value("${spring.kafka.bootstrap-servers:http://localhost:9090}")
+	@Value("${spring.kafka.bootstrap-servers:http}")
 	private String bootstrapAddress;
 }

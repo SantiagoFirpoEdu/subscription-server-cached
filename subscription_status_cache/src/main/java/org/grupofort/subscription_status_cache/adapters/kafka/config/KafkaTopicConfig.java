@@ -22,17 +22,11 @@ public class KafkaTopicConfig
 		return new KafkaAdmin(configs);
 	}
 
-	@Bean
-	public NewTopic subscriptionStatusUpdateTopic()
-	{
-		return TopicBuilder.name("subscription-status-updated").build();
-	}
-
 	public String getBootstrapAddress()
 	{
 		return bootstrapAddress;
 	}
 
-	@Value(value = "${spring.kafka.bootstrap-servers:http://localhost:9090}")
+	@Value(value = "${spring.kafka.bootstrap-servers}")
 	private String bootstrapAddress;
 }

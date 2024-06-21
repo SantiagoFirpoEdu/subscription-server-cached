@@ -6,6 +6,10 @@ spring:
                   uri: lb://subscription-service
                   predicates:
                       - Path=/servcad/**
+                - id: subscription-payment-service
+                  uri: lb://subscription-service
+                  predicates:
+                      - Path=/registrarpagamento/**
                 - id: subscription-status-service
                   uri: lb://subscription-status-service
                   predicates:

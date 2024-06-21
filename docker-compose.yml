@@ -5,7 +5,7 @@ services:
     build:
       context: ./subscription_gateway
     ports:
-      - 8000
+      - 8080:8000
     networks:
       - eureka
   discovery_service:
@@ -21,7 +21,7 @@ services:
   subscription_status_cache:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
     build:
       context: ./subscription_status_cache
     ports:
@@ -29,10 +29,12 @@ services:
     networks:
       - eureka
       - kafka
+    deploy:
+      replicas: 3
   subscription_service:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9093
     build:
       context: ./subscription_service
     ports:
@@ -43,15 +45,16 @@ services:
   kafka:
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT_HOST
+      - KAFKA_INTER_BROKER_LISTENER_NAME=HOST
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT_HOST://localhost:9092
-    image: confluentinc/cp-kafka:7.6.1
-    hostname: kafka
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTAINER:PLAINTEXT,HOST:PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=CONTAINER://kafka:9093,HOST://localhost:9092
+      - KAFKA_LISTENERS=CONTAINER://kafka:9093,HOST://localhost:9092
     ports:
       - 9092:9092
+    image: confluentinc/cp-kafka:7.6.1
+    hostname: kafka
     networks:
       - kafka
       - zookeeper

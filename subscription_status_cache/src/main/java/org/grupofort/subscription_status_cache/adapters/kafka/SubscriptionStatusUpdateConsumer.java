@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SubscriptionStatusUpdateConsumer
 {
-	@KafkaListener(topics = "subscription-status-update", groupId = "subscription-status-cache")
+	@KafkaListener(topics = "subscription-status-update")
 	public void listenToSubscriptionStatusUpdates(String message)
 	{
 		System.out.println("Received message: " + message);
