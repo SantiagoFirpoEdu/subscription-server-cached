@@ -1,5 +1,7 @@
 services:
   subscription_gateway:
+    environment:
+      - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
     build:
       context: ./subscription_gateway
     ports:
@@ -7,13 +9,18 @@ services:
     networks:
       - eureka
   discovery_service:
+    environment:
+      - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
     build:
       context: ./discovery_service
     ports:
       - 8001
+    hostname: discoveryservice
     networks:
       - eureka
   subscription_status_cache:
+    environment:
+      - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
     build:
       context: ./subscription_status_cache
     ports:
@@ -21,6 +28,8 @@ services:
     networks:
       - eureka
   subscription_service:
+    environment:
+      - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
     build:
       context: ./subscription_service
     ports:
