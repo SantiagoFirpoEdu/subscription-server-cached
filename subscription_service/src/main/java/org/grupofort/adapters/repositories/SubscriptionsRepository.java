@@ -115,7 +115,7 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     @Override
     public void notifySubscriptionStatusChanged(long subscriptionId, @NonNull ESubscriptionStatus newStatus)
     {
-        kafkaTemplate.send("subscription-status-changed", "%d,%s".formatted(subscriptionId, newStatus));
+        kafkaTemplate.send("subscription-status-update", "%d,%s".formatted(subscriptionId, newStatus));
     }
 
     private final KafkaTemplate<String, String> kafkaTemplate;
