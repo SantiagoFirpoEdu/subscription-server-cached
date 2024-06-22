@@ -1,0 +1,25 @@
+@idAssinatura = 1
+
+###
+
+GET http://localhost:8080/assinvalida/{{idAssinatura}}
+Content-Type: application/json
+
+###
+
+@renovar = 16.5
+POST http://localhost:8080/registrarpagamento
+Content-Type: application/json
+
+{
+  "dia": 12,
+  "mes": 5,
+  "ano": 2024,
+  "codass": {{idAssinatura}},
+  "valorPago": {{renovar}}
+}
+
+###
+
+GET http://localhost:8080/assinvalida/{{idAssinatura}}
+Content-Type: application/json
