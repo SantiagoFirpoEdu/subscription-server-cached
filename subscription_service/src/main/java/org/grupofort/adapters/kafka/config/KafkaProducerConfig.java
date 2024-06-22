@@ -1,7 +1,8 @@
 package org.grupofort.adapters.kafka.config;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.kafka.common.serialization.BooleanSerializer;
+import org.apache.kafka.common.serialization.LongSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -14,30 +15,32 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
 
-	public KafkaProducerConfig(KafkaTopicConfig kafkaTopicConfig)
+	public KafkaProducerConfig(KafkaAdminConfig kafkaAdminConfig)
 	{
-		this.kafkaTopicConfig = kafkaTopicConfig;
+		this.kafkaAdminConfig = kafkaAdminConfig;
 	}
 
 	@Bean
-	public ProducerFactory<String, String> producerFactory() {
+	public ProducerFactory<Long, Boolean> producerFactory()
+	{
 		Map<String, Object> configProps = new HashMap<>();
 		configProps.put(
+				ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+				BooleanSerializer.class);
+		configProps.put(
 				ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-				kafkaTopicConfig.getBootstrapAddress());
+				kafkaAdminConfig.getBootstrapAddress());
 		configProps.put(
 				ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-				StringSerializer.class);
-		configProps.put(
-				ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-				StringSerializer.class);
+				LongSerializer.class);
 		return new DefaultKafkaProducerFactory<>(configProps);
 	}
 
 	@Bean
-	public KafkaTemplate<String, String> kafkaTemplate() {
+	public KafkaTemplate<Long, Boolean> kafkaTemplate()
+	{
 		return new KafkaTemplate<>(producerFactory());
 	}
 
-	private final KafkaTopicConfig kafkaTopicConfig;
+	private final KafkaAdminConfig kafkaAdminConfig;
 }

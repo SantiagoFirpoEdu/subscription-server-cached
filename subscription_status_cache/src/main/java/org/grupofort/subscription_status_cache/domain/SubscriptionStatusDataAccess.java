@@ -18,6 +18,11 @@ public class SubscriptionStatusDataAccess
         return subscriptionStatuses.computeIfAbsent(subscriptionId, subscriptionStatusProxy::getSubscriptionStatus);
     }
 
+	public void updateSubscriptionStatus(Long subscriptionId, Boolean isActive)
+	{
+		subscriptionStatuses.put(subscriptionId, isActive);
+	}
+
     private final SubscriptionStatusProxy subscriptionStatusProxy;
     private final HashMap<Long, Boolean> subscriptionStatuses = new HashMap<>();
 }

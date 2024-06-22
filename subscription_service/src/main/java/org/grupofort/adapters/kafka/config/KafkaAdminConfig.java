@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaTopicConfig
+public class KafkaAdminConfig
 {
 	@Bean
 	public KafkaAdmin kafkaAdmin()
@@ -25,6 +25,6 @@ public class KafkaTopicConfig
 		return bootstrapAddress;
 	}
 
-	@Value("${spring.kafka.bootstrap-servers:http}")
+	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapAddress;
 }

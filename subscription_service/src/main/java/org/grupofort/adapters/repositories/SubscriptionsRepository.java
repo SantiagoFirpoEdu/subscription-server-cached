@@ -28,7 +28,7 @@ import java.util.Optional;
 public class SubscriptionsRepository implements AddSubscriptionDataAccess, QuerySubscriptionsDataAccess, UpdateSubscriptionDataAccess
 {
     @Autowired
-    public SubscriptionsRepository(KafkaTemplate<String, String> kafkaTemplate, SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
+    public SubscriptionsRepository(KafkaTemplate<Long, Boolean> kafkaTemplate, SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
     {
 	    this.kafkaTemplate = kafkaTemplate;
 	    this.subscriptionJpaRepository = subscriptionJpaRepository;
@@ -115,10 +115,10 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     @Override
     public void notifySubscriptionStatusChanged(long subscriptionId, @NonNull ESubscriptionStatus newStatus)
     {
-        kafkaTemplate.send("subscription-status-update", "%d,%s".formatted(subscriptionId, newStatus));
+        kafkaTemplate.send("subscription-status-update", subscriptionId, newStatus.equals(ESubscriptionStatus.ACTIVE));
     }
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<Long, Boolean> kafkaTemplate;
     private final SubscriptionJpaRepository subscriptionJpaRepository;
     private final CustomerJpaRepository customerJpaRepository;
     private final ApplicationJpaRepository applicationJpaRepository;

@@ -1,7 +1,8 @@
 package org.grupofort.subscription_status_cache.adapters.kafka.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.BooleanDeserializer;
+import org.apache.kafka.common.serialization.LongDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -16,17 +17,17 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
-	public KafkaConsumerConfig(KafkaTopicConfig kafkaTopicConfig)
+	public KafkaConsumerConfig(KafkaAdminConfig kafkaAdminConfig)
 	{
-		this.kafkaTopicConfig = kafkaTopicConfig;
+		this.kafkaAdminConfig = kafkaAdminConfig;
 	}
 
 	@Bean
-	public ConsumerFactory<String, String> consumerFactory() {
+	public ConsumerFactory<Long, Boolean> consumerFactory() {
 		Map<String, Object> props = new HashMap<>();
 		props.put(
 				ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-				kafkaTopicConfig.getBootstrapAddress());
+				kafkaAdminConfig.getBootstrapAddress());
 		props.put(
 				ConsumerConfig.GROUP_ID_CONFIG,
 				"subscription-status-cache");
@@ -35,21 +36,21 @@ public class KafkaConsumerConfig {
 				"earliest");
 		props.put(
 				ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-				StringDeserializer.class);
+				LongDeserializer.class);
 		props.put(
 				ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-				StringDeserializer.class);
+				BooleanDeserializer.class);
 		return new DefaultKafkaConsumerFactory<>(props);
 	}
 
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, String>
+	public ConcurrentKafkaListenerContainerFactory<Long, Boolean>
 	kafkaListenerContainerFactory() {
 
-		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+		ConcurrentKafkaListenerContainerFactory<Long, Boolean> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
 		return factory;
 	}
 
-	private final KafkaTopicConfig kafkaTopicConfig;
+	private final KafkaAdminConfig kafkaAdminConfig;
 }
