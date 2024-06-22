@@ -8,6 +8,8 @@ services:
       - 8080:8000
     networks:
       - eureka
+    depends_on:
+      - discovery_service
   discovery_service:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
@@ -31,6 +33,10 @@ services:
       - kafka
     deploy:
       replicas: 3
+    depends_on:
+      - discovery_service
+      - kafka
+      - subscription_service
   subscription_service:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
@@ -41,6 +47,9 @@ services:
       - 8003
     networks:
       - eureka
+      - kafka
+    depends_on:
+      - discovery_service
       - kafka
   kafka:
     environment:
@@ -57,6 +66,8 @@ services:
     hostname: kafka
     networks:
       - kafka
+      - zookeeper
+    depends_on:
       - zookeeper
   zookeeper:
     environment:
