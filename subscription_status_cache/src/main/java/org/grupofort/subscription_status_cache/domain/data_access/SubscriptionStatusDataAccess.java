@@ -1,4 +1,4 @@
-package org.grupofort.subscription_status_cache.domain;
+package org.grupofort.subscription_status_cache.domain.data_access;
 
 import org.grupofort.subscription_status_cache.adapters.SubscriptionStatusProxy;
 import org.springframework.stereotype.Component;

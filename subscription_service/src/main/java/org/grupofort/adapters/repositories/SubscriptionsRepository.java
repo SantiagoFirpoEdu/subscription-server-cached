@@ -15,8 +15,9 @@ import org.grupofort.domain.data_access.AddSubscriptionDataAccess;
 import org.grupofort.domain.data_access.UpdateSubscriptionDataAccess;
 import org.grupofort.domain.data_access.subscriptions.ESubscriptionStatusFilter;
 import org.grupofort.domain.data_access.subscriptions.QuerySubscriptionsDataAccess;
+import org.grupofort.domain.entities.subscription.SubscriptionStatusUpdate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -28,9 +29,9 @@ import java.util.Optional;
 public class SubscriptionsRepository implements AddSubscriptionDataAccess, QuerySubscriptionsDataAccess, UpdateSubscriptionDataAccess
 {
     @Autowired
-    public SubscriptionsRepository(KafkaTemplate<Long, Boolean> kafkaTemplate, SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
+    public SubscriptionsRepository(RabbitTemplate rabbitTemplate, SubscriptionJpaRepository subscriptionJpaRepository, CustomerJpaRepository customerJpaRepository, ApplicationJpaRepository applicationJpaRepository)
     {
-	    this.kafkaTemplate = kafkaTemplate;
+	    this.rabbitTemplate = rabbitTemplate;
 	    this.subscriptionJpaRepository = subscriptionJpaRepository;
         this.customerJpaRepository = customerJpaRepository;
         this.applicationJpaRepository = applicationJpaRepository;
@@ -115,10 +116,10 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
     @Override
     public void notifySubscriptionStatusChanged(long subscriptionId, @NonNull ESubscriptionStatus newStatus)
     {
-        kafkaTemplate.send("subscription-status-update", subscriptionId, newStatus.equals(ESubscriptionStatus.ACTIVE));
+        rabbitTemplate.convertAndSend("subscription-status-update-fanout", "", new SubscriptionStatusUpdate(subscriptionId, newStatus.equals(ESubscriptionStatus.ACTIVE)));
     }
 
-    private final KafkaTemplate<Long, Boolean> kafkaTemplate;
+    private final RabbitTemplate rabbitTemplate;
     private final SubscriptionJpaRepository subscriptionJpaRepository;
     private final CustomerJpaRepository customerJpaRepository;
     private final ApplicationJpaRepository applicationJpaRepository;

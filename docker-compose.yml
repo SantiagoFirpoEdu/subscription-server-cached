@@ -23,65 +23,43 @@ services:
   subscription_status_cache:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
-      - KAFKA_BOOTSTRAP_SERVERS=://kafka:9092
+      - RABBITMQ_SERVICE_URL=rabbitmq
     build:
       context: ./subscription_status_cache
     ports:
       - 8002
     networks:
       - eureka
-      - kafka
+      - rabbitmq
     deploy:
       replicas: 3
     depends_on:
       - discovery_service
-      - kafka
+      - rabbitmq
       - subscription_service
   subscription_service:
     environment:
       - EUREKA_SERVICE_URL=http://discoveryservice:8001/eureka/
-      - KAFKA_BOOTSTRAP_SERVERS=://kafka:9092
+      - RABBITMQ_SERVICE_URL=rabbitmq
     build:
       context: ./subscription_service
     ports:
       - 8003
     networks:
       - eureka
-      - kafka
+      - rabbitmq
     depends_on:
       - discovery_service
-      - kafka
-  kafka:
-    environment:
-        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-        KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-        KAFKA_LISTENERS: EXTERNAL_SAME_HOST://:29092,INTERNAL://:9092
-        KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092
-        KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
-        KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      - rabbitmq
+  rabbitmq:
+    image: rabbitmq:management
     ports:
-      - 29092:29092
-    image: confluentinc/cp-kafka:7.6.1
-    hostname: kafka
+      - "5672:5672" #JMS Port
+      - "15672:15672" #Management Port - default user:pass = guest:guest
     networks:
-      - kafka
-      - zookeeper
-    depends_on:
-      - zookeeper
-  zookeeper:
-    environment:
-      - ZOOKEEPER_CLIENT_PORT=2181
-      - ADVERTISED_HOST_NAME=zookeeper
-    image: confluentinc/cp-zookeeper:7.0.1
-    hostname: zookeeper
-    ports:
-      - 2181
-    networks:
-      - zookeeper
+      - rabbitmq
 networks:
   eureka:
     driver: bridge
-  kafka:
-    driver: bridge
-  zookeeper:
+  rabbitmq:
     driver: bridge
