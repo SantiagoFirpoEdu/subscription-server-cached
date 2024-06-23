@@ -1,4 +1,7 @@
+# Nomes: Lucas Wolschick, Paola Lopes, Santiago Firpo e Vitor Jacom
+
 Coisas para fazer
+
 - [X] Subir Kafka
 - [X] Debugar Docker Compose
 - [X] Registrar serviços no discovery service
