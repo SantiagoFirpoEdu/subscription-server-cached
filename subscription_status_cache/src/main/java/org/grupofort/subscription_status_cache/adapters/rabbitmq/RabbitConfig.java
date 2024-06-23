@@ -34,6 +34,7 @@ public class RabbitConfig
 		return new Jackson2JsonMessageConverter();
 	}
 
+	@SuppressWarnings("unused")
 	public String getQueueName()
 	{
 		return queueName;
