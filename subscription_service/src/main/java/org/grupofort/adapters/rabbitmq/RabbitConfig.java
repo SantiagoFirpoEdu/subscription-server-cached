@@ -21,7 +21,6 @@ public class RabbitConfig
 		);
 	}
 
-
 	@Bean
 	public MessageConverter converter()
 	{

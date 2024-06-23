@@ -5,7 +5,7 @@ services:
     build:
       context: ./subscription_gateway
     ports:
-      - 8080:8000
+      - 8080:8080
     networks:
       - eureka
     depends_on:
@@ -54,8 +54,8 @@ services:
   rabbitmq:
     image: rabbitmq:management
     ports:
-      - "5672:5672" #JMS Port
-      - "15672:15672" #Management Port - default user:pass = guest:guest
+      - 5672:5672 #JMS Port
+      - 15672:15672 #Management Port - default user:pass = guest:guest
     networks:
       - rabbitmq
 networks:
