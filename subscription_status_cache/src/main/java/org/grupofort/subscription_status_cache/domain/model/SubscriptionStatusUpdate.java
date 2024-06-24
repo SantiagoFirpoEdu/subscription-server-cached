@@ -1,5 +1,7 @@
 package org.grupofort.subscription_status_cache.domain.model;
 
-public record SubscriptionStatusUpdate(long subscriptionId, boolean status)
+import java.time.LocalDate;
+
+public record SubscriptionStatusUpdate(long subscriptionId, LocalDate newEndDate)
 {
 }

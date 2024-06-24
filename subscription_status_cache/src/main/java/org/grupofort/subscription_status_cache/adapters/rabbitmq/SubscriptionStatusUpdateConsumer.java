@@ -18,7 +18,7 @@ public class SubscriptionStatusUpdateConsumer
 	@RabbitListener(queues = "#{rabbitConfig.getQueueName()}")
 	public void listenToSubscriptionStatusUpdates(@Payload @NonNull SubscriptionStatusUpdate subscriptionStatusUpdate)
 	{
-		subscriptionStatusDataAccess.updateSubscriptionStatus(subscriptionStatusUpdate.subscriptionId(), subscriptionStatusUpdate.status());
+		subscriptionStatusDataAccess.updateSubscriptionStatus(subscriptionStatusUpdate.subscriptionId(), subscriptionStatusUpdate.newEndDate());
 	}
 
 	private final SubscriptionStatusDataAccess subscriptionStatusDataAccess;

@@ -1,28 +1,29 @@
 package org.grupofort.subscription_status_cache.domain.data_access;
 
-import org.grupofort.subscription_status_cache.adapters.SubscriptionStatusProxy;
+import org.grupofort.subscription_status_cache.adapters.SubscriptionProxy;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 @Component
 public class SubscriptionStatusDataAccess
 {
-    public SubscriptionStatusDataAccess(SubscriptionStatusProxy subscriptionStatusProxy)
+    public SubscriptionStatusDataAccess(SubscriptionProxy subscriptionProxy)
     {
-        this.subscriptionStatusProxy = subscriptionStatusProxy;
+        this.subscriptionProxy = subscriptionProxy;
     }
 
-    public boolean getSubscriptionStatus(long subscriptionId)
+    public LocalDate getSubscriptionEndDate(long subscriptionId)
     {
-        return subscriptionStatuses.computeIfAbsent(subscriptionId, subscriptionStatusProxy::getSubscriptionStatus);
+        return subscriptionStatuses.computeIfAbsent(subscriptionId, subscriptionIdToCompute -> subscriptionProxy.getSubscriptionStatus(subscriptionIdToCompute).endDate());
     }
 
-	public void updateSubscriptionStatus(Long subscriptionId, Boolean isActive)
+	public void updateSubscriptionStatus(Long subscriptionId, LocalDate newEndDate)
 	{
-		subscriptionStatuses.put(subscriptionId, isActive);
+		subscriptionStatuses.put(subscriptionId, newEndDate);
 	}
 
-    private final SubscriptionStatusProxy subscriptionStatusProxy;
-    private final HashMap<Long, Boolean> subscriptionStatuses = new HashMap<>();
+    private final SubscriptionProxy subscriptionProxy;
+    private final HashMap<Long, LocalDate> subscriptionStatuses = new HashMap<>();
 }

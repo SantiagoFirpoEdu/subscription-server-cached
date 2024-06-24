@@ -12,5 +12,4 @@ import java.time.LocalDate;
 public interface UpdateSubscriptionDataAccess
 {
     Subscription updateSubscriptionEndDate(long subscriptionId, LocalDate newEndDate) throws SubscriptionNotFoundException;
-    void notifySubscriptionStatusChanged(long subscriptionId, @NonNull ESubscriptionStatus newStatus);
 }

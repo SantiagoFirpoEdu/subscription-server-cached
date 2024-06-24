@@ -1,5 +1,6 @@
 package org.grupofort.adapters.controllers.subscriptions;
 
+import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
 import org.grupofort.domain.entities.subscription.Subscription;
 import org.grupofort.domain.data_access.exceptions.ApplicationNotFoundException;
 import org.grupofort.domain.data_access.exceptions.CustomerNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "servcad/assinaturas")
@@ -35,6 +37,18 @@ public class SubscriptionController
 	public List<Subscription> getAllSubscriptionsByFilter(@PathVariable @NonNull String filterType) throws InvalidSubscriptionStatusException
 	{
 		return querySubscriptions.findAllByFilter(ESubscriptionStatusFilter.convertFromLocalized(filterType));
+	}
+
+	@GetMapping("id/{subscriptionId}")
+	public Subscription getSubscription(@PathVariable @NonNull long subscriptionId) throws SubscriptionNotFoundException
+    {
+		Optional<Subscription> found = querySubscriptions.findById(subscriptionId);
+		if (found.isEmpty())
+		{
+			throw new SubscriptionNotFoundException(subscriptionId);
+		}
+
+		return found.get();
 	}
 
 	@Autowired()

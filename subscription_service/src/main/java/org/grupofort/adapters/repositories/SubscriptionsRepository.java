@@ -110,13 +110,9 @@ public class SubscriptionsRepository implements AddSubscriptionDataAccess, Query
         SubscriptionJpaEntity subscription = existingSubscription.get();
         subscription.setEndDate(newEndDate);
 
-        return subscriptionJpaRepository.save(subscription).toDomainEntity();
-    }
+        rabbitTemplate.convertAndSend("subscription-status-update-fanout", "", new SubscriptionStatusUpdate(subscriptionId, newEndDate));
 
-    @Override
-    public void notifySubscriptionStatusChanged(long subscriptionId, @NonNull ESubscriptionStatus newStatus)
-    {
-        rabbitTemplate.convertAndSend("subscription-status-update-fanout", "", new SubscriptionStatusUpdate(subscriptionId, newStatus.equals(ESubscriptionStatus.ACTIVE)));
+        return subscriptionJpaRepository.save(subscription).toDomainEntity();
     }
 
     private final RabbitTemplate rabbitTemplate;

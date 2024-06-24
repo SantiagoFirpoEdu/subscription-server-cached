@@ -1,5 +1,7 @@
 package org.grupofort.domain.entities.subscription;
 
-public record SubscriptionStatusUpdate(long subscriptionId, boolean status)
+import java.time.LocalDate;
+
+public record SubscriptionStatusUpdate(long subscriptionId, LocalDate newEndDate)
 {
 }

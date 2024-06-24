@@ -6,7 +6,6 @@ import org.grupofort.domain.data_access.RegisterPaymentDataAccess;
 import org.grupofort.domain.data_access.UpdateSubscriptionDataAccess;
 import org.grupofort.domain.data_access.exceptions.InvalidPaidAmountException;
 import org.grupofort.domain.data_access.exceptions.SubscriptionNotFoundException;
-import org.grupofort.domain.entities.subscription.ESubscriptionStatus;
 import org.grupofort.domain.entities.subscription.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -55,11 +54,6 @@ public class RegisterPayment
 		LocalDate dateToUse = isValid ? subscription.endDate() : date;
 		LocalDate newEndDate = dateToUse.plusMonths(1);
 		updateSubscriptionDataAccess.updateSubscriptionEndDate(subscriptionId, newEndDate);
-
-		if (!isValid)
-		{
-			updateSubscriptionDataAccess.notifySubscriptionStatusChanged(subscriptionId, ESubscriptionStatus.ACTIVE);
-		}
 
 		return newEndDate;
 	}
