@@ -16,7 +16,7 @@ public class SubscriptionStatusDataAccess
 
     public LocalDate getSubscriptionEndDate(long subscriptionId)
     {
-        return subscriptionStatuses.computeIfAbsent(subscriptionId, subscriptionIdToCompute -> subscriptionProxy.getSubscriptionStatus(subscriptionIdToCompute).endDate());
+        return subscriptionStatuses.computeIfAbsent(subscriptionId, subscriptionProxy::getSubscriptionStatus);
     }
 
 	public void updateSubscriptionStatus(Long subscriptionId, LocalDate newEndDate)

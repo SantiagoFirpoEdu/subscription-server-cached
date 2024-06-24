@@ -1,13 +1,14 @@
 package org.grupofort.subscription_status_cache.adapters;
 
-import org.grupofort.subscription_status_cache.domain.model.entities.subscription.Subscription;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+
 @FeignClient(name = "subscription-service")
 public interface SubscriptionProxy
 {
-    @GetMapping("/servcad/assinaturas/id/{subscriptionId}")
-    Subscription getSubscriptionStatus(@PathVariable long subscriptionId);
+    @GetMapping("/servcad/assinaturas/datatermino/{subscriptionId}")
+    LocalDate getSubscriptionStatus(@PathVariable long subscriptionId);
 }

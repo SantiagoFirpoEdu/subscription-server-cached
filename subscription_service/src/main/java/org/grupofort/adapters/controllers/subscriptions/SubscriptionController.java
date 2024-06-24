@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +40,8 @@ public class SubscriptionController
 		return querySubscriptions.findAllByFilter(ESubscriptionStatusFilter.convertFromLocalized(filterType));
 	}
 
-	@GetMapping("id/{subscriptionId}")
-	public Subscription getSubscription(@PathVariable @NonNull long subscriptionId) throws SubscriptionNotFoundException
+	@GetMapping("/datatermino/{subscriptionId}")
+	public LocalDate getSuscriptionEndDate(@PathVariable @NonNull long subscriptionId) throws SubscriptionNotFoundException
     {
 		Optional<Subscription> found = querySubscriptions.findById(subscriptionId);
 		if (found.isEmpty())
@@ -48,7 +49,7 @@ public class SubscriptionController
 			throw new SubscriptionNotFoundException(subscriptionId);
 		}
 
-		return found.get();
+		return found.get().endDate();
 	}
 
 	@Autowired()
