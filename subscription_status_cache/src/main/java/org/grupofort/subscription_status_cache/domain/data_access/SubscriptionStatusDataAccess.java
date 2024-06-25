@@ -19,7 +19,7 @@ public class SubscriptionStatusDataAccess
         return subscriptionStatuses.computeIfAbsent(subscriptionId, subscriptionProxy::getSubscriptionStatus);
     }
 
-	public void updateSubscriptionStatus(Long subscriptionId, LocalDate newEndDate)
+	public void updateSubscriptionStatus(long subscriptionId, LocalDate newEndDate)
 	{
 		subscriptionStatuses.put(subscriptionId, newEndDate);
 	}
