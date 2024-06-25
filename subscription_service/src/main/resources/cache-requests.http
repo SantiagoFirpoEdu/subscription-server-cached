@@ -12,8 +12,8 @@ POST http://localhost:8080/registrarpagamento
 Content-Type: application/json
 
 {
-  "dia": 12,
-  "mes": 5,
+  "dia": 26,
+  "mes": 6,
   "ano": 2024,
   "codass": {{idAssinatura}},
   "valorPago": {{renovar}}
